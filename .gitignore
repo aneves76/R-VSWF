@@ -1,3 +1,5 @@
+.Rdata
+.Rhistory
 # text editors (emacs, vim)
 *~
 *.swp

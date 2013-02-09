@@ -1,0 +1,3630 @@
+\documentclass[12pt]{book}                  %% LaTeX 2e
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{colordvi}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage[numbers,sort&compress,super,comma,square]{natbib}
+\usepackage{hypernat}
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage[letterpaper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
+%--------------------------------------------------------------------------------
+\renewcommand\familydefault{\sfdefault}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%--------------------------------------------------------------------------------
+\title{Expans\~ao de Campos Eletromagn\'eticos Arbitr\'arios em Termos de 
+Fun\c c\~oes de Onda Vetoriais}
+\author{Wendel Lopes Moreira}
+%-------------------------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------------------------
+\onehalfspacing
+\maketitle
+%-------------------------------------------------------------------------------
+% PRIMEIRA PARTE - TEORIA
+%-------------------------------------------------------------------------------
+\part{Teoria}
+%-------------------------------------------------------------------------------
+\chapter{As ondas parciais}
+%-------------------------------------------------------------------------------
+\section{Definições}
+%-------------------------------------------------------------------------------
+A expansão em termos de funções de onda esféricas vetoriais para campos 
+eletromagnéticos arbitrários é dada pela expressão
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm E}}(\bm{{\rm r}})\\
+\bm{{\rm H}}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=\sum_{l=1}^\infty\sum_{m=-l}^l\left(
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+\bm{{\rm M}}_{lm}(\bm{{\rm r}})
++
+\left[
+\begin{array}{c}
+-G_{lm}^{TM}\\
+ G_{lm}^{TE}\\
+\end{array}
+\right]
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})
+\right)
+\end{eqnarray}
+em que
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}(\bm{{\rm r}})&=&j_l(kr)\bm{{\rm X}}_{lm}(\bm{{\rm\hat{r}}})\\
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})&=&\frac{-i}{k}\nabla\times\bm{{\rm M}}_{lm}(\bm{{\rm r}}).
+\end{eqnarray}
+Sabendo que $\bm{{\rm X}}_{lm}=\bm{{\rm L}}Y_l^m/\sqrt{l(l+1)}$ e algumas propriedades
+vetorias obtemos
+\begin{eqnarray}
+\bm{{\rm N}}_{lm}(\bm{{\rm r}})
+=\left(j_l'(kr)+\frac{j_l(kr)}{kr}\right)\bm{{\rm V}}_{lm}(\bm{{\rm\hat{r}}})
++\sqrt{l(l+1)}\frac{j_l(kr)}{kr}\bm{{\rm Y}}_{lm}(\bm{{\rm\hat{r}}})
+\end{eqnarray}
+uma vez que $\bm{{\rm V}}_{lm}(\bm{{\rm\hat{r}}})=
+-i\bm{{\rm\hat{r}}}\times\bm{{\rm X}}_{lm}(\bm{{\rm\hat{r}}})$ e 
+$\bm{{\rm Y}}_{lm}(\bm{{\rm\hat{r}}})=\bm{{\rm\hat{r}}}Y_l^m(\bm{{\rm\hat{r}}})$.
+Com isto, conhecendo-se $G_{lm}^{TE/TM}$ podemos calcular os campos 
+eletromagnéticos.
+%-------------------------------------------------------------------------------
+\section{Cálculo dos harmônicos esféricos escalares}
+%-------------------------------------------------------------------------------
+Para isto usamos as relações de recorrência dos polinômios de Legendre, dados
+pela fórmula de Rodrigues para $m>0$
+\begin{eqnarray}
+P_l^m(x)=(-1)^m(1-x^2)^{m/2}\frac{d^{l+m}}{dx^{l+m}}(x^2-1)^l,
+\end{eqnarray}
+o que vai nos dar os harmônicos esféricos escalares
+\begin{eqnarray}
+Y_l^m(\theta,\phi)=\sqrt{\frac{2l+1}{4\pi}}
+\sqrt{\frac{(l-m)!}{(l+m)!}}P_l^m(\cos\theta)e^{im\phi}.
+\end{eqnarray}
+
+Temos também as seguintes relações 
+\begin{eqnarray}
+P_l^{-m}(x)=(-1)^m\frac{(l-m)!}{(l+m)!}P_l^m(x),
+\end{eqnarray}
+e para os harmônicos esféricos escalares
+\begin{eqnarray}
+Y_l^{-m}(\theta,\phi)=(-1)^mY_l^m{}^*(\theta,\phi).
+\end{eqnarray}
+
+Devido a instabilidade numérica, alguns programas utilizam os
+polinômios associados de Legendre normalizados. Utilizaremos
+deste modo, a seguinte normalização
+\begin{eqnarray}
+Q_l^m(x)=\sqrt{\frac{2l+1}{4\pi}}\sqrt{\frac{(l-m)!}{(l+m)!}}P_l^m(x)
+\end{eqnarray}
+o que vai nos dar diretamente
+\begin{eqnarray}
+Y_l^m(\theta,\phi)=Q_l^m(\cos\theta)e^{im\phi},
+\end{eqnarray}
+e além disso, a relação
+\begin{eqnarray}
+Q_l^{-m}(x)=(-1)^mQ_l^m(x)
+\end{eqnarray}
+também será válida.
+
+Estes polinômios são calculados via relação de recorrência, basicamente
+em três termos, utilizando
+\begin{eqnarray}
+P_l^m    (x)&=&\frac{2l-1}{l-m}P_{l-1}^m(x)-\frac{l+m-1}{l-m}P_{l-2}^m(x)\\
+P_l^l    (x)&=&-(2l-1)\sqrt{1-x^2}P_{l-1}^{l-1}(x)\\
+P_l^{l-1}(x)&=&(2l-1)xP_{l-1}^{l-1}(x)
+\end{eqnarray}
+ou para os polinômios normalizados
+\begin{eqnarray}
+Q_l^m  (x)\!\!\!\!&=&\!\!\!\!\sqrt{\frac{(2l-1)(2l+1)}{(l-m)(l+m)}}Q_{l-1}^m(x)
+\!-\!\sqrt{\frac{2l+1}{2l-3}}\sqrt{\frac{(l-m-1)(l+m-1)}{(l-m)(l+m)}}
+Q_{l-2}^m(x)\\
+Q_l^l    (x)\!\!\!\!&=&\!\!\!\!
+-\sqrt{\frac{2l-1}{2l}}\sqrt{1-x^2}Q_{l-1}^{l-1}(x)\\
+Q_l^{l-1}(x)\!\!\!\!&=&\!\!\!\!\sqrt{2l+1}xQ_{l-1}^{l-1}(x)
+\end{eqnarray}
+Sabendo que $P_0^0=1$ temos que $Q_0^0=1/\sqrt{4\pi}$, podemos primeiramente 
+calcular os elementos da diagonal utilizando a recorrência em $P_l^l$ 
+ou $Q_l^l$, depois calcular a diagonal inferior para $m>0$ por meio de 
+$P_l^{l-1}$ ou $Q_l^{l-1}$. Os demais termos são calculados pela forma geral de 
+$P_l^m$ ou de $Q_l^m$, e os termos para $m<0$ por meio da relação de paridade.
+Para efeito de comparação utilizamos a biblioteca \texttt{gsl} (Gnu Scientific
+Library) que nos fornece tanto $P_l^m$ quanto $Q_l^m$, como definimos, e também
+o \emph{software} \texttt{scilab}, que nos fornece $P_l^m$ e $\sqrt{2\pi}Q_l^m$.
+%-------------------------------------------------------------------------------
+\subsection{Caso para $\theta=0$}
+%-------------------------------------------------------------------------------
+Sabemos que 
+\begin{eqnarray}
+Y_l^m(0,\phi)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}.
+\end{eqnarray}
+Para demonstrar isto utilizaremos as relações de recorrências
+dos polinômios associados de Legendre.
+Para o caso $\theta=0$ temos que $x=\cos\theta=1$, o que nos dá,
+para $l=1$
+\begin{eqnarray}
+P_1^1  (1)&=&0\\
+P_1^{0}(1)&=&(2l-1)P_{0}^{0}(1)=P_{0}^{0}(1)
+\end{eqnarray}
+para $l>2$
+\begin{eqnarray}
+P_l^m    (1)&=&\frac{2l-1}{l-m}P_{l-1}^m(1)-\frac{l+m-1}{l-m}P_{l-2}^m(1)\\
+P_l^l    (1)&=&0\\
+P_l^{l-1}(1)&=&(2l-1)P_{l-1}^{l-1}(1)=0
+\end{eqnarray}
+com isto temos que só serão diferentes de zero os termos com $m=0$, e para eles
+\begin{eqnarray}
+P_l^0(1)&=&\frac{2l-1}{l}P_{l-1}^m(1)-\frac{l-1}{l}P_{l-2}^m(1)\\
+\end{eqnarray}
+Para $l=2$ temos que $P_1^0=P_0^0=1$, o que nos diz que 
+\begin{eqnarray}
+P_2^0(1)&=&\frac{2l-1}{l}-\frac{l-1}{l}=1
+\end{eqnarray}
+e com isto mostramos que $P_l^0(1)=1$. Sendo assim,
+fica claro que 
+\begin{eqnarray}
+Q_l^m(1)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}
+\end{eqnarray}
+e por conseguinte
+\begin{eqnarray}
+Y_l^m(0,\phi)=Q_l^m(1)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\subsection{Método das listas}
+%-------------------------------------------------------------------------------
+Vamos de agora em diante escrever tudo como uma lista contínua dada por $l$, em
+que um determinado para $(p,q)$ ocupa a posição $l=p(p+1)+q$.  Numa lista com 
+$p$ máximo igual $p_M$, vamos ter um total de $l_M=p_M(p_M+2)$ elementos.
+A rotina para cálculos dos polinômios de Legendre via relação de recorrência
+é muito mais rápida que utilizando a biblioteca \texttt{gsl}, já que 
+necessitamos de todas ordens dos polinômios de Legendre, ao passo que o
+ao calcular um a um, os termos utilizados na recorrência são deixados de lado,
+sendo novamente calculados na próxima sequência.
+%-------------------------------------------------------------------------------
+\section{Harmônicos esféricos vetoriais}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\subsection{Vetores complexos}
+%-------------------------------------------------------------------------------
+Vamos ao longo deste trabalho utilizar uma base complexa definida como
+\begin{eqnarray}
+\bm{{\rm\hat{e}}}_+&=&\frac{\bm{{\rm\hat{e}}}_x+\bm{{\rm\hat{e}}}_y}{\sqrt{2}}\\
+\bm{{\rm\hat{e}}}_-&=&\frac{\bm{{\rm\hat{e}}}_x-\bm{{\rm\hat{e}}}_y}{\sqrt{2}}.
+\end{eqnarray}
+Os vetores são definidos como 
+$\bm{{\rm A}}=A_x\bm{{\rm\hat{e}}}_x+A_y\bm{{\rm\hat{e}}}_y$, sendo que
+$A_x=\bm{{\rm\hat{e}}}_x\cdot\bm{{\rm A}}$, deste modo temos
+$A_\pm=\bm{{\rm\hat{e}}}_\pm\cdot\bm{{\rm A}}$ e assim
+$\bm{{\rm A}}=A_+\bm{{\rm\hat{e}}}_-+A_-\bm{{\rm\hat{e}}}_+$.
+Entretanto, convém notar que $\bm{{\rm\hat{e}}}_\pm^*=\bm{{\rm\hat{e}}}_\mp$,
+o que inverte o sinal do termo da base.
+Assim, um vetor $\bm{{\rm U}}$ é dado por
+\begin{eqnarray}
+\bm{{\rm U}}
+=
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_-\cdot\bm{{\rm U}}\\
+\bm{{\rm\hat{e}}}_z\cdot\bm{{\rm U}}\\
+\bm{{\rm\hat{e}}}_+\cdot\bm{{\rm U}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+U_-\\
+U_z\\
+U_+\\
+\end{array}
+\right].
+\end{eqnarray}
+Deste modo, há de se tomar extremo cuidado ao fazer produtos escalares e
+vetoriais com estas componentes complexas. O produto vetorial é
+dado por
+\begin{eqnarray}
+\bm{{\rm U}}=\bm{{\rm A}}\times\bm{{\rm B}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{e}}}_z&\bm{{\rm\hat{e}}}_+\\
+A_-&A_z&A_+\\
+B_-&B_z&B_+\\
+\end{array}
+\right|
+=i
+\left[
+\begin{array}{c}
+A_-B_z-A_zB_-\\
+A_+B_--A_-B_z\\
+A_zB_+-A_+B_-\\
+\end{array}
+\right].
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\section{Definições de VSH}
+%-------------------------------------------------------------------------------
+Devemos calcular os harmônicos esféricos vetoriais em função dos harmônicos
+esféricos escalares. Para compararmos vamos utilizar os diversos tipos de 
+definição para compararmos os resultados.
+Podemos facilmente definir os VSH como sendo
+%-------------------------------------------------------------------------------
+\begin{eqnarray}
+\bm{{\rm Y}}_{lm}
+   &=&\bm{{\rm \hat{r}}}Y_{lm}\\
+\bm{{\rm X}}_{lm}
+   &=&\frac{\bm{{\rm L}}Y_{lm}}{\sqrt{l(l+1)}}\\
+\bm{{\rm V}}_{lm}
+   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm},
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+e ainda pode-se facilmente mostrar que $\bm{{\rm X}}_{lm}$ e $\bm{{\rm V}}_{lm}$
+mantém a seguinte relação
+%-------------------------------------------------------------------------------
+\begin{eqnarray}
+\bm{{\rm X}}_{lm}   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm V}}_{lm},\\
+\bm{{\rm V}}_{lm}   &=&-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}.
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+Deste modo, podemos calcular $\bm{{\rm Y}}_{lm}$ diretamente, e 
+$\bm{{\rm X}}_{lm}$ também quase que diretamente, e $\bm{{\rm V}}_{lm}$
+pode ser obtido por meio das expressões diretas ou pelo produto vetorial.
+Além disso temos também os VSH definidos como
+$\bm{{\rm Y}}_{j,l}^{m}$, dados por
+\begin{eqnarray}
+\bm{ Y}_{j,j-1}^{m}&=&
+ \sqrt{\frac{j  }{2j+1}}\bm{{\rm Y}}_{jm}
++\sqrt{\frac{j+1}{2j+1}}\bm{{\rm V}}_{jm}\\
+\bm{ Y}_{j,j  }^{m}&=&
+                        \bm{{\rm X}}_{jm}\\
+\bm{ Y}_{j,j+1}^{m}&=&
+-\sqrt{\frac{j+1}{2j+1}}\bm{{\rm Y}}_{jm}
++\sqrt{\frac{j  }{2j+1}}\bm{{\rm V}}_{jm}
+\end{eqnarray}
+Estas expressões podem ser facilmente invertidas, de onde podemos tirar
+\begin{eqnarray}
+\bm{{\rm Y}}_{jm}&=& 
+ \sqrt{\frac{j  }{2j+1}}\bm{ Y}_{j,j-1}^{m}
++\sqrt{\frac{j+1}{2j+1}}\bm{ Y}_{j,j+1}^{m}\\
+\bm{{\rm X}}_{jm}&=& 
+                       \bm{ Y}_{j,j  }^{m}\\
+\bm{{\rm V}}_{jm}&=& 
+ \sqrt{\frac{j+1}{2j+1}}\bm{ Y}_{j,j-1}^{m}
+-\sqrt{\frac{j  }{2j+1}}\bm{ Y}_{j,j+1}^{m}
+\end{eqnarray}
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\section{Formas explícitas}
+%-------------------------------------------------------------------------------
+Ulilizaremos em muitas ocasiões as definições
+\begin{eqnarray}
+\bm{{\rm \hat{r}}}
+=\bm{{\rm \hat{x}}}\sin\theta\cos\phi
++\bm{{\rm \hat{y}}}\sin\theta\sin\phi
++\bm{{\rm \hat{z}}}\cos\theta
+=\frac{\sin\theta e^{-i\phi}}{\sqrt{2}}\bm{{\rm \hat{e}}}_+
++\frac{\sin\theta e^{i\phi}}{\sqrt{2}}\bm{{\rm \hat{e}}}_-
++\cos\theta\bm{{\rm \hat{z}}},%\\
+\end{eqnarray}
+e também
+\begin{eqnarray}
+\bm{{\rm L}}=\frac{L_-}{\sqrt{2}}\bm{{\rm \hat{e}}}_+
++\frac{L_+}{\sqrt{2}}\bm{{\rm \hat{e}}}_-
++L_z\bm{{\rm \hat{z}}}.
+\end{eqnarray}
+Sabendo que $L_\pm Y_l^m=c^{\pm}_{lm}Y_l^{m\pm1}$, 
+sendo que $c^{\pm}_{lm}=\sqrt{l(l+1)-m(m\pm1)}$, temos
+\begin{eqnarray}
+K_{+,l}^{m,q}&=&\sqrt{\frac{(l+m)(l+q)}{(2l-1)(2l+1)}}\\
+K_{-,l}^{m,q}&=&\sqrt{\frac{(l-m)(l-q)}{(2l-1)(2l+1)}}\\
+K_{0,l}^{m,q}&=&\sqrt{\frac{(l-m)(l+q)}{(2l-1)(2l+1)}}
+\end{eqnarray}
+vamos ter \cite{Arfken2005}
+\begin{eqnarray}
+\cos\theta~Y_l^m           &=&
+K_{0,l+1}^{m,m  }Y_{l+1}^{m  }+K_{0,l  }^{m,m  }Y_{l-1}^{m  }\\
+\sin\theta e^{ i\phi}~Y_l^m&=&
+K_{-,l  }^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
+\sin\theta e^{-i\phi}~Y_l^m&=&
+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}-K_{+,l  }^{m,m-1}Y_{l-1}^{m-1}
+\end{eqnarray}
+o que vai nos dar 
+para $\bm{{\rm V}}_{lm}=-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}$
+\begin{eqnarray}
+\bm{{\rm V}}_{lm}
+&=&
+\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+-(l+1)K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}
+-l K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+ (l+1)K_{0,l}^{m,m  }Y_{l-1}^{m  }         
+-l K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\       
+ (l+1)K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}
++l K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]\\
+\bm{{\rm Y}}_{lm}
+&=&
+\left[
+\begin{array}{c}
+-K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+ K_{0,l}^{m,m  }Y_{l-1}^{m  }         +K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\
+ K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]\\
+%
+\bm{{\rm X}}_{lm}
+&=&\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+c_-^{l,m}Y_{l}^{m-1}/\sqrt{2}\\
+       m Y_{l}^{m  }\\
+c_+^{l,m}Y_{l}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+
+Os outros harmônicos esféricos vetoriais são dados por\cite{Newton2002}
+\begin{eqnarray}
+\bm{ Y}_{l,l-1}^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{l-1,m}}{\sqrt{2l(2l-1)}}Y_{l-1,m-1}\\
+\frac{         m }{\sqrt{ l(2l-1)}}Y_{l-1,m  }\\
+\frac{c_+^{l-1,m}}{\sqrt{2l(2l-1)}}Y_{l-1,m+1}\\
+\end{array}
+\right]\\
+\bm{ Y}_{l,l  }^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{lm}}{\sqrt{2l(l+1)}}Y_{l,m-1}\\
+\frac{      m }{\sqrt{ l(l+1)}}Y_{l,m  }\\
+\frac{c_+^{lm}}{\sqrt{2l(l+1)}}Y_{l,m+1}\\
+\end{array}
+\right]\\
+\bm{ Y}_{l,l+1}^{m}&=&
+\left[
+\begin{array}{c}
+\frac{c_-^{l+1,m}}{\sqrt{2(l+1)(2l+3)}}Y_{l+1,m-1}\\
+\frac{         m }{\sqrt{ (l+1)(2l+3)}}Y_{l+1,m  }\\
+\frac{c_+^{l+1,m}}{\sqrt{2(l+1)(2l+3)}}Y_{l+1,m+1}\\
+\end{array}
+\right]
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+\section{Comparações}
+%-------------------------------------------------------------------------------
+Primeiramente vamos começar com $\bm{{\rm Y}}_{lm}=\bm{{\rm \hat{r}}}Y_{lm}$,
+fazendo a multiplicação. Temos
+\begin{eqnarray}
+\bm{{\rm Y}}_{lm}=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{c}
+\sin\theta e^{-i\phi}\\
+\sin\theta e^{ i\phi}\\
+\sqrt{2}\cos\theta \\
+\end{array}
+\right]Y_l^m(\theta,\phi)
+\end{eqnarray}
+e vamos comparar com a forma explícita.
+%\begin{eqnarray}
+%\bm{{\rm Y}}_{lm}=\frac{1}{\sqrt{2}}
+%\left[
+%\begin{array}{c}
+%K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}-K_{+,l  }^{m,m-1}Y_{l-1}^{m-1}\\
+%K_{0,l+1}^{m,m  }Y_{l+1}^{m  }+K_{0,l  }^{m,m  }Y_{l-1}^{m  }\\
+%K_{-,l  }^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
+%\end{array}
+%\right].
+%\end{eqnarray}
+Calculamos então $\bm{{\rm Y}}_{lm}$ por meio de 
+$-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}$
+e comparamos com a expressão explícita. Fazendo
+\begin{eqnarray}
+-i\bm{{\rm \hat{r}}}\times\bm{{\rm X}}_{lm}
+=
+\left|
+\begin{array}{ccc}
+\bm{{\rm \hat{e}}}_-&\bm{{\rm \hat{e}}}_z&\bm{{\rm \hat{e}}}_+\\
+r_-&r_z&r_+\\
+X_-&X_z&X_+\\
+\end{array}
+\right|
+=
+\left[
+\begin{array}{c}
+r_-X_z-r_zX_-\\
+r_+X_--r_-X_+\\
+r_zX_+-r_+X_z\\
+\end{array}
+\right],
+\end{eqnarray}
+podemos comparar os valores de $\bm{{\rm V}}_{lm}$ obtidos pela fórmula
+explícita e pela fórmula direta.
+
+Podemos ainda comparar com os resultados de $\bm{ Y}_{l,j}^{m}$. Com
+isto, verificamos dois a dois os valores para 
+$\bm{{\rm Y}}_{lm}$ e $\bm{{\rm V}}_{lm}$. E finalmente, podemos
+conferir os valores de $\bm{ Y}_{l,j}^{m}$ com $\bm{{\rm X}}_{lm}$,
+$\bm{{\rm Y}}_{lm}$ e  $\bm{{\rm V}}_{lm}$ por meio dos multipolos
+de Hansen.
+
+%-------------------------------------------------------------------------------
+% Como podemos ver, necessitamos calcular para $\bm{{\rm Y}}_{lm}$
+% \begin{eqnarray}
+% \left[
+% \begin{array}{c}
+% K_{-,l+1}^{m,m-1}\\
+% K_{0,l+1}^{m,m  }\\
+% K_{+,l+1}^{m,m+1}\\
+% K_{-,l  }^{m,m+1}\\
+% K_{0,l  }^{m,m  }\\
+% K_{+,l  }^{m,m-1}\\
+% \end{array}
+% \right]
+% \end{eqnarray}
+%e para $\bm{{\rm V}}_{p,q}$
+%
+%\begin{eqnarray}
+%\left[
+%\begin{array}{c}
+%K_{+,p  }^{q  ,q-1}\\
+%K_{-,p+1}^{q  ,q-1}\\
+%K_{-,p  }^{q  ,q+1}\\
+%K_{+,p+1}^{q  ,q+1}\\
+%K_{0,p  }^{q  ,q  }\\
+%K_{0,p+1}^{q  ,q  }\\
+%\end{array}
+%\right]
+%\end{eqnarray}
+%
+%\begin{eqnarray}
+%\left[
+%\begin{array}{c}
+%Y_{p-1}^{q-1}\\
+%Y_{p+1}^{q-1}\\
+%Y_{p-1}^{q+1}\\
+%Y_{p+1}^{q+1}\\
+%Y_{p-1}^{q  }\\
+%Y_{p+1}^{q  }\\
+%\end{array}
+%\right]
+%\end{eqnarray}
+%
+%
+%
+%
+%
+% dados por
+% \begin{eqnarray}
+% K_{-,l}^{m,q}&=&\sqrt{\frac{(l-m)(l-q)}{(2l-1)(2l+1)}}\\
+% K_{0,l}^{m,q}&=&\sqrt{\frac{(l-m)(l+q)}{(2l-1)(2l+1)}}\\
+% K_{+,l}^{m,q}&=&\sqrt{\frac{(l+m)(l+q)}{(2l-1)(2l+1)}}
+% \end{eqnarray}
+% 
+% Vamos então averiguar o comportamento destas funções para valores
+% extremos. Para $m=l_{max}$ temos
+% \begin{eqnarray}
+% K_{-,l+1}^{l+1,l  }&=&0\\
+% K_{0,l+1}^{l+1,l+1}&=&0\\
+% K_{+,l+1}^{l+1,l+2}&=&\sqrt{\frac{2l+2}{2l+1}}\\
+% K_{-,l  }^{l  ,l+1}&=&0\\
+% K_{0,l  }^{l  ,l  }&=&0\\
+% K_{+,l  }^{l  ,l-1}&=&\sqrt{\frac{2l}{2l+1}}
+% \end{eqnarray}
+% Para $m=-l_{max}$ temos
+% \begin{eqnarray}
+% K_{-,l+1}^{-l-1,-l-2}&=&\sqrt{\frac{2l+2}{2l+1}}\\
+% K_{0,l+1}^{-l-1,-l-1}&=&0\\
+% K_{+,l+1}^{-l-1,-l  }&=&0\\
+% K_{-,l  }^{-l  ,-l+1}&=&\sqrt{\frac{2l}{2l+1}}\\
+% K_{0,l  }^{-l  ,-l  }&=&0\\
+% K_{+,l  }^{-l  ,-l-1}&=&0
+% \end{eqnarray}
+%%-------------------------------------------------------------------------------
+%Precisamos então calcular em lista os termos para os VSH
+%\begin{eqnarray}
+%%K_{-,l+1}^{m,m-1}
+%%K_{0,l+1}^{m,m  }
+%%K_{+,l+1}^{m,m+1}
+%%K_{-,l  }^{m,m+1}
+%%K_{0,l  }^{m,m  }
+%%K_{+,l  }^{m,m-1}
+%Y_{l-1}^{m-1}\\
+%Y_{l-1}^{m  }\\
+%Y_{l-1}^{m+1}\\
+%Y_{l  }^{m-1}\\
+%Y_{l  }^{m  }\\
+%Y_{l  }^{m+1}\\
+%Y_{l+1}^{m-1}\\
+%Y_{l+1}^{m  }\\
+%Y_{l+1}^{m+1}\\
+%\end{eqnarray}
+
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\section{Multipolos de Hansen}
+%-------------------------------------------------------------------------------
+Os multipolos de Hansen são definidos como se segue
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&u_l(kr)\bm{{\rm X}}_{lm}\\
+\bm{{\rm N}}_{lm}&=&-\frac{i}{k}\nabla\times\bm{{\rm M}}_{lm}
+%\bm{{\rm L}}_{lm}&=&-\frac{i}{k}\nabla\big(u_l(kr)Y_{lm}(\bm{{\rm\hat{r}}})\big)
+\end{eqnarray}
+A grande virtude destes multipolos é que eles são ótimos para
+decompor campos que são mutuamente rotacionais (como requer
+as leis de Faraday e Ampére) ou divergentes (como requer
+a lei de Gauss):
+\begin{eqnarray}
+\nabla\cdot\bm{{\rm M}}_{lm}&=&0\\
+\nabla\cdot\bm{{\rm N}}_{lm}&=&0%\\
+%\nabla\cdot\bm{{\rm L}}_{lm}&=&iku_l(kr)Y_{lm}(\bm{{\rm\hat{r}}})
+\end{eqnarray}
+e também
+\begin{eqnarray}
+\nabla\times\bm{{\rm M}}_{lm}&=&ik\bm{{\rm N}}_{lm}\\
+\nabla\times\bm{{\rm N}}_{lm}&=&ik\bm{{\rm M}}_{lm}%\\
+%\nabla\times\bm{{\rm L}}_{lm}&=&0
+\end{eqnarray}
+o que mostra como $\bm{{\rm M}}_{lm}$ e $\bm{{\rm N}}_{lm}$ são ideais
+para descrever em multipolos os campos elétrico e magnético, ligados
+pelas leis de Ampère e de Faraday.
+
+Vamos então expandir as definições e verificar as formas explícitas destes
+multipolos.
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&j_l(kr)\bm{Y}_{l,l}^m\\
+\bm{{\rm N}}_{lm}&=&\sqrt{\frac{l+1}{2l+1}}j_{l-1}(kr)\bm{Y}_{l,l-1}^m
+-\sqrt{\frac{l  }{2l+1}}j_{l+1}(kr)\bm{Y}_{l,l+1}^m
+%\bm{{\rm L}}_{lm}&=&\sqrt{\frac{l  }{2l+1}}f_{l-1}(kr)\bm{Y}_{l,l-1}^m
+%+\sqrt{\frac{l+1}{2l+1}}f_{l+1}(kr)\bm{Y}_{l,l+1}^m
+\end{eqnarray}
+ou na forma diferencial
+\begin{eqnarray}
+\bm{{\rm M}}_{lm}&=&j_l(kr)\bm{{\rm X}}_{lm}\\
+\bm{{\rm N}}_{lm}&=&
+\left(j_l'(kr)+\frac{j_l(kr)}{kr}\right)\bm{{\rm V}}_{lm}
++\sqrt{l(l+1)}\frac{j_l(kr)}{kr}\bm{{\rm Y}}_{lm}
+%\bm{{\rm L}}_{lm}&=&-\sqrt{l(l+1)}\frac{f_l(kr)}{kr}\bm{{\rm V}}_{lm}
+%-f_l'(kr)\bm{{\rm Y}}_{lm}
+\end{eqnarray}
+
+Como podemos ver, estas relações nos permitem construir soluções completamente
+gerais para as equações dos campos eletromagnéticos de uma maneira que é 
+intuitiva, razoável e matematicamente e numericamente tratável, de modo que 
+poderemos daqui em diante usar identidades e relações entre os harmônicos 
+esféricos vetorias e/ou as equações de Bessel, Neumann e Hankel.
+%-------------------------------------------------------------------------------
+\subsection{Relações de recorrência para funções esféricas de Bessel}
+%-------------------------------------------------------------------------------
+As seguintes relações de recorrência são válidas para as funções esféricas
+de Bessel:
+\begin{eqnarray}
+&&f_{n-1}+f_{n+1}=(2n+1)\frac{f_n}{x}\\
+&&nf_{n-1}-(n+1)f_{n+1}=(2n+1)f_n'\\
+&&(n+1)\frac{f_n}{x}+f_n'=f_{n-1}\\
+&&n\frac{f_n}{x}-f_n'=f_{n+1}.
+\end{eqnarray}
+De posse destas relações, temos diretamente que 
+\begin{eqnarray}
+\bm{{\rm N}}_{lm}&=&
+\left(\frac{l+1}{2l+1}j_{l-1}-\frac{l}{2l+1}j_{l+1}\right)
+\bm{{\rm V}}_{lm}+\frac{\sqrt{l(l+1)}}{2l+1}\Big(j_{l-1}+j_{l+1}\Big)\bm{{\rm Y}}_{lm}
+%\bm{{\rm L}}_{lm}&=&
+%-\frac{\sqrt{l(l+1)}}{2l+1}\big(f_{l-1}(kr)+f_{l+1}(kr)\big)\bm{{\rm V}}_{lm}
+%+\nonumber\\
+%&-&\left(\frac{l}{2l+1}f_{l-1}(kr)-\frac{l+1}{2l+1}f_{l+1}(kr)\right)
+%\bm{{\rm Y}}_{lm}
+\end{eqnarray}
+Com isto temos todos os harmônicos esféricos vetorias e multipolos de Hansen
+definidos.
+%-------------------------------------------------------------------------------
+\subsection{Harmônicos esféricos vetoriais para $l=0$}
+%-------------------------------------------------------------------------------
+Para $l=0$ temos
+\begin{eqnarray}
+\bm{{\rm X}}_{00}
+=
+\left[
+\begin{array}{c}
+0\\
+0\\
+0\\
+\end{array}
+\right],
+\end{eqnarray}
+mas
+\begin{eqnarray}
+\bm{{\rm Y}}_{00}
+=\frac{1}{\sqrt{8\pi}}
+\left[
+\begin{array}{c}
+\sin\theta e^{-im\phi}\\
+\sqrt{2}\cos\theta\\
+\sin\theta e^{ im\phi}\\
+\end{array}
+\right],
+\end{eqnarray}
+e finalmente, devida à dependência nas componentes de $\bm{{\rm X}}_{00}$,
+\begin{eqnarray}
+\bm{{\rm V}}_{00}
+=
+\left[
+\begin{array}{c}
+0\\
+0\\
+0\\
+\end{array}
+\right].
+\end{eqnarray}
+%------------------------------------------------------------------------------
+\chapter{Cálculo dos coeficientes da expansão}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\chapter{Exemplos de expansões}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\section{Onda Plana}
+%------------------------------------------------------------------------------
+Para o caso da onda plana cujos campos elétrico e magnético são dados por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0e^{i\bm{{\rm k}}\cdot\bm{{\rm r}}}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{u}}}\\
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}
+\end{array}                       
+\right],
+\end{eqnarray}
+As componentes de $\bm{\mathcal{X}}_{lm}$ são dadas por
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}%=\frac{\bm{\mathcal{L}}Y_l^m}{\sqrt{l(l+1)}}
+=\frac{1}{\sqrt{l(l+1)}}\left[
+\begin{array}{c}
+c_-^{lm}Y_l^{m-1}/\sqrt{2}\\
+      m Y_l^{m  }          \\
+c_+^{lm}Y_l^{m+1}/\sqrt{2}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{l(l+1)}}\left[
+\begin{array}{c}
+c_-^{lm}Q_l^{m-1}e^{i(m-1)\zeta}/\sqrt{2}\\
+      m Q_l^{m  }e^{i m   \zeta}          \\
+c_+^{lm}Q_l^{m+1}e^{i(m+1)\zeta}/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+de modo que os BSC definidos como sendo
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=i^l4\pi\bm{\mathcal{X}}_{lm}^*(\bm{{\rm\hat{k}}})\cdot
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{u}}}\\
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}
+\end{array}
+\right].
+\end{eqnarray}
+Tomando 
+$\bm{{\rm\hat{u}}}=(u_-,u_z,u_+)$ e do mesmo modo 
+$\bm{{\rm\hat{k}}}=(k_-,k_z,k_+)$, temos
+\begin{eqnarray}
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{e}}}_z&\bm{{\rm\hat{e}}}_+\\
+k_-&k_z&k_+\\
+u_-&u_z&u_+\\
+\end{array}
+\right|
+=i
+\left[
+\begin{array}{c}
+k_-u_z-k_zu_-\\
+k_+u_--k_-u_+\\
+k_zu_+-k_+u_z\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{c}
+\alpha_-\\
+\alpha_z\\
+\alpha_+\\
+\end{array}
+\right]
+\end{eqnarray}
+e assim
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=
+\frac{4\pi i^l}{\sqrt{l(l+1)}}\!\!
+\left(
+\frac{c_-^{lm}Y_l^{m-1}{}^*}{\sqrt{2}}
+\left[
+\begin{array}{c}
+     u_-\\
+\alpha_-\\
+\end{array}
+\right]
++mY_l^m{}^*
+\left[
+\begin{array}{c}
+     u_z\\
+\alpha_z\\
+\end{array}
+\right]
++
+\frac{c_+^{lm}Y_l^{m+1}{}^*}{\sqrt{2}}
+\left[
+\begin{array}{c}
+     u_+\\
+\alpha_+\\
+\end{array}
+\right]
+\right)
+\end{eqnarray}
+temos a expressão geral para a onda plana genérica.
+
+
+
+Para o caso particular de 
+$\bm{{\rm\hat{k}}}=\bm{{\rm\hat{e}}}_z$ e
+$\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_p$,
+em que $p=\pm(1)$, 
+de modo que $\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}=-i\bm{{\rm\hat{e}}}_p$,
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=i^l4\pi\bm{\mathcal{X}}_{lm}^*(\bm{{\rm\hat{k}}})\cdot\bm{{\rm\hat{e}}}_p
+\left[
+\begin{array}{c}
+  1\\
+-ip\\
+\end{array}
+\right]
+=4\pi i^l\frac{c_{-p}^{lm}Y_l^{m+p}}{\sqrt{2l(l+1)}}
+\left[
+\begin{array}{c}
+  1\\
+-ip\\
+\end{array}
+\right]
+\end{eqnarray}
+Neste caso $Y_l^m(0,\zeta)=\sqrt{(2l+1)/4\pi}\delta_{m,0}$ o que nos dá
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=4\pi i^l\sqrt{\frac{2l+1}{4\pi}}\frac{c_{-p}^{lm}\delta_{m-p,0}}{\sqrt{2l(l+1)}}
+\left[
+\begin{array}{c}
+  1\\
+-ip\\
+\end{array}
+\right]
+=i^l\sqrt{2\pi(2l+1)}
+\left[
+\begin{array}{c}
+  1\\
+-ip\\
+\end{array}
+\right]\delta_{m,p}
+\end{eqnarray}
+Com estes valores podemos calcular os campos por meio da expansão em ondas
+parciais. Para o caso em que $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_+$,
+%temos que $(k_-,k_z,k_+)=(0,1,0)$, $(u_-,u_z,u_+)=(1,0,0)$ e
+%$(\alpha_-,\alpha_z,\alpha_+)=\mp i(1,0,0)$, que nos dá
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=i^l\sqrt{2\pi(2l+1)}\delta_{m,1}
+\left[
+\begin{array}{c}
+  1\\
+- i\\
+\end{array}
+\right].
+\end{eqnarray}
+Este resultado difere em $\sqrt{2}$ do resultado mostrado 
+no Jackson devido ao fato de 
+considerarmos a componente $\bm{{\rm\hat{e}}}_\pm$ ao invés de 
+$\bm{{\rm\hat{x}}}\pm\bm{{\rm\hat{y}}}=\sqrt{2}\bm{{\rm\hat{e}}}_\pm$ 
+como no feito no livro.
+%------------------------------------------------------------------------------
+\section{Guias de onda}
+%------------------------------------------------------------------------------
+Sabemos que os guias de onda obedecem à relação
+\begin{eqnarray}
+Z^{TE/TM}\bm{{\rm H}}_{\rm T}=\pm\bm{{\rm\hat{z}}}\times\bm{{\rm E}}_{\rm T}
+\end{eqnarray}
+em que 
+\begin{eqnarray}
+Z^{TM}&=&\frac{k_z}{k}Z\\
+Z^{TE}&=&\frac{k}{k_z}Z
+\end{eqnarray}
+Além disso, temos para o modo TM
+\begin{eqnarray}
+\bm{{\rm E}}_{\rm T}=\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\psi
+\end{eqnarray}
+o que nos dá
+\begin{eqnarray}
+Z^{TM}\bm{{\rm H}}_{\rm T}=\frac{k_z}{k}Z\bm{{\rm H}}_{\rm T}=\pm\bm{{\rm\hat{z}}}\times\bm{{\rm E}}_{\rm T}
+\end{eqnarray}
+o que nos dá 
+\begin{eqnarray}
+Z\bm{{\rm H}}_{\rm T}=\frac{ik}{\gamma^2}\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\psi
+\end{eqnarray}
+Agora podemos escrever os campos completos comos sendo
+\begin{eqnarray}
+  \bm{{\rm E}}^{TM}&=&\left[\bm{{\rm\hat{z}}}\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\right]\psi\\
+-Z\bm{{\rm H}}^{TM}&=&\frac{k}{\gamma^2}\left[-i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+
+Para o modo TE
+\begin{eqnarray}
+\bm{{\rm H}}_{\rm T}=\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\psi
+\end{eqnarray}
+e ainda
+\begin{eqnarray}
+\pm Z^{TE}\bm{{\rm H}}_{\rm T}=\pm\frac{k}{k_z}Z\bm{{\rm H}}_{\rm T}=\bm{{\rm\hat{z}}}\times\bm{{\rm E}}_{\rm T}
+\end{eqnarray}
+e com isto
+\begin{eqnarray}
+\pm Z\frac{k}{k_z}\bm{{\rm H}}_{\rm T}=\bm{{\rm\hat{z}}}\times\bm{{\rm E}}_{\rm T}
+\end{eqnarray}
+Multiplicando ambos os lados por $-\bm{{\rm\hat{z}}}\times$ vamos ter
+\begin{eqnarray}
+\bm{{\rm E}}_{\rm T}=\mp\frac{k}{k_z}\bm{{\rm\hat{z}}}\times Z\bm{{\rm H}}_{\rm T}
+=-\frac{ik}{\gamma^2}\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\psi
+\end{eqnarray}
+Assim, juntando as componentes obtemos
+\begin{eqnarray}
+\bm{{\rm H}}^{TE}&=&\left[\bm{{\rm\hat{z}}}\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\right]\psi\\
+\bm{{\rm E}}^{TE}&=&\frac{k}{\gamma^2}\left[-i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+
+Assim, podemos ver que as equações para os campos mantém uma certa similaridade, 
+e que podem ser escritas como sendo
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+  \bm{{\rm E}}^{TM}\\
+  \bm{{\rm H}}^{TE}\\
+\end{array}
+\right]
+=\left[\bm{{\rm\hat{z}}}\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+  \bm{{\rm E}}^{TE}\\
+-Z\bm{{\rm H}}^{TM}\\
+\end{array}
+\right]
+=\frac{k}{\gamma^2}\left[-i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+
+
+
+%------------------------------------------------------------------------------
+\subsection{Definição das transformadas}
+%------------------------------------------------------------------------------
+Vamos definir as transformadas de Fourier como sendo
+\begin{eqnarray}
+\bm{{\rm E}}(\bm{{\rm r}}')&=&
+\mathcal{F}^{-1}\left\{\bm{\mathcal{E}}(\bm{{\rm k}}')\right\}=
+\frac{1}{(2\pi)^{3/2}}
+\int d^3k'~\bm{\mathcal{E}}(\bm{{\rm k}}')e^{ i\bm{{\rm k}}'\cdot\bm{{\rm r}}'}
+\\
+\bm{\mathcal{E}}(\bm{{\rm k}}')&=&
+\mathcal{F}\left\{\bm{{\rm E}}(\bm{{\rm r}}')\right\}=
+\frac{1}{(2\pi)^{3/2}}
+\int d^3r'~\bm{{\rm E}}(\bm{{\rm r}}')e^{-i\bm{{\rm k}}'\cdot\bm{{\rm r}}'}
+\end{eqnarray}
+Podemos com isto demonstrar que 
+\begin{eqnarray}
+\mathcal{F}\left\{\nabla\cdot\bm{{\rm E}}(\bm{{\rm r}}')\right\}=
+i\bm{{\rm k}}'\cdot\bm{\mathcal{E}}(\bm{{\rm k}}')
+\end{eqnarray}
+sendo que relações semelhantes valem para o gradiente de uma função
+escalar e para o produto vetorial.
+%------------------------------------------------------------------------------
+\subsection{Campos no interior de guias de onda}
+%------------------------------------------------------------------------------
+Os campos eletromagnéticos são definidos e correlacionados segunda as equações
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}^{TM}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}^{TE}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\left[\bm{{\rm\hat{z}}}+i\frac{k_z}{\gamma^2}\frac{d}{d\bm{\rho}}\right]g(\bm{{\rm r}})
+\end{eqnarray}
+e os demais campos por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+  \bm{{\rm E}}^{TE}(\bm{{\rm r}})\\
+-Z\bm{{\rm H}}^{TM}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\frac{k}{\gamma^2}\left[-i
+\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{\rho}}\right]g(\bm{{\rm r}})
+\end{eqnarray}
+sendo que
+\begin{eqnarray}
+\bm{\rho}           &=& x\bm{{\rm\hat{e}}}_x+y\bm{{\rm\hat{e}}}_y\\
+\frac{d}{d\bm{\rho}}&=&\frac{\partial}{\partial x}\bm{{\rm\hat{e}}}_x+\frac{\partial}{\partial y}\bm{{\rm\hat{e}}}_y
+\end{eqnarray}
+
+No domínio de Fourier estes campos são dados por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{\mathcal{E}}^{TM}(\bm{{\rm k}})\\
+Z\bm{\mathcal{H}}^{TE}(\bm{{\rm k}})\\
+\end{array}
+\right]
+=E_0\left[\bm{{\rm\hat{z}}}-\frac{k_z\gamma'}{\gamma^2}\bm{\hat{\gamma}}\right]G(\bm{{\rm k}}')
+\end{eqnarray}
+e ainda, sabendo que $\bm{\hat{\zeta}}=\bm{{\rm\hat{z}}}\times\bm{\hat{\gamma}}$
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+-Z\bm{\mathcal{H}}^{TM}(\bm{{\rm k}})\\
+  \bm{\mathcal{E}}^{TE}(\bm{{\rm k}})\\
+\end{array}
+\right]
+=E_0\frac{k\gamma'}{\gamma^2}\bm{\hat{\zeta}}G(\bm{{\rm k}}')
+\end{eqnarray}
+Necessitamos neste caso verificar a transformada de $g(\bm{{\rm r}})$.
+Para o caso dos guias de onda, temos que
+\begin{eqnarray}
+g(\bm{{\rm r}}')=\bar{g}(\bm{{\rm\rho}}')e^{ik_zz'}
+\end{eqnarray}
+e que $\bar{g}(\bm{{\rm\rho}})$ obedece a equação de onda em duas dimensões
+\begin{eqnarray}
+\frac{d^2}{d\bm{{\rm\rho}}^2}\bar{g}(\bm{{\rm\rho}}')=-\gamma^2\bar{g}(\bm{{\rm\rho}}')
+\end{eqnarray}
+o que no domínio de Fourier fica
+\begin{eqnarray}
+-\gamma'{}^2\bar{G}(\bm{{\rm\gamma}}')=-\gamma^2\bar{G}(\bm{{\rm\gamma}}')
+\end{eqnarray}
+o que nos diz que 
+\begin{eqnarray}
+\bar{G}(\bm{{\rm\gamma}}')=G_\gamma(\zeta')\frac{\delta(\gamma'-\gamma)}{\gamma}
+\end{eqnarray}
+Deste modo, vamos ter que 
+\begin{eqnarray}
+\bar{G}(\bm{{\rm r}}')=\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(\gamma'-\gamma)}{\gamma}\delta(k_z'-k_z)
+%                      &=&\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k^2}\frac{\delta(\xi'-\xi)}{\sin\xi}\\
+%                      &=&\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k^2}\delta(\cos\xi'-\cos\xi)\\
+                      =\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k^2}\delta(k_z'/k-k_z/k)
+%                      &=&\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k^2}k\delta(k_z'-k_z)
+%                      &=&\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k^2}\frac{\gamma\delta(\xi'-\xi)}{k}\\
+%                      &=&\sqrt{2\pi}G_\gamma(\zeta')\frac{\delta(k'-k)}{k}\delta(k_z'-k_z)
+\end{eqnarray}
+
+Substituindo as expressões acima nas equações dos campos temos
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{\mathcal{E}}^{TM}(\bm{{\rm k}})\\
+Z\bm{\mathcal{H}}^{TE}(\bm{{\rm k}})\\
+\end{array}
+\right]
+=\left[\sqrt{2\pi}E_0\left[\bm{{\rm\hat{z}}}-\frac{k_z}{\gamma}\bm{\hat{\gamma}}\right]
+G_\gamma(\zeta')\delta(k_z'/k-k_z/k)\right]\frac{\delta(k'-k)}{k^2}
+\end{eqnarray}
+e para os outros campos
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+-Z\bm{\mathcal{H}}^{TM}(\bm{{\rm k}})\\
+  \bm{\mathcal{E}}^{TE}(\bm{{\rm k}})\\
+\end{array}
+\right]
+=\left[\sqrt{2\pi}E_0\frac{k}{\gamma}\bm{\hat{\zeta}}
+G_\gamma(\zeta')\delta(k_z'/k-k_z/k)\right]\frac{\delta(k'-k)}{k^2}
+\end{eqnarray}
+sendo que os termos entre colchetes (que excluem as deltas em $k$)
+são os termos dos campos com subíndice ${\rm k}$.
+Podemos agora com estes campos calcular os coeficientes, que são dados por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=\frac{i^p}{E_0}\sqrt{\frac{2}{\pi}}\int d\Omega(\bm{{\rm\hat{k}}})~\bm{\mathcal{X}}_{lm}^*(\bm{{\rm\hat{k}}}')\cdot
+\left[
+\begin{array}{c}
+ \bm{\mathcal{E}}_{\rm k}(\bm{{\rm\hat{k}}}')\\
+Z\bm{\mathcal{H}}_{\rm k}(\bm{{\rm\hat{k}}}')\\
+\end{array}
+\right]
+\end{eqnarray}
+A integral em $d\Omega(\bm{{\rm\hat{k}}}')$ pode ser escrita como uma
+integral em $d\zeta d\xi \sin\xi=d\zeta d(\cos\xi)=d\zeta d(k_z'/k)$. Com
+isto e com a presença de $\delta(k_z'/k-k_z/k)$, a integral em 
+$d\Omega(\bm{{\rm\hat{k}}}')$ vai se tornar uma integral simples em $d\zeta'$.
+Para isto, precisamos calcular
+\begin{eqnarray}
+\alpha&=&\bm{\mathcal{X}}_{lm}^*(\bm{{\rm\hat{k}}}')\cdot\left[\bm{{\rm\hat{z}}}-\frac{k_z}{\gamma}\bm{\hat{\gamma}}\right]\\
+\beta&=&\frac{k_z}{\gamma}\bm{\mathcal{X}}_{lm}^*(\bm{{\rm\hat{k}}}')\cdot\bm{\hat{\zeta}}
+\end{eqnarray}
+e para isto precisamos saber como expressar o operador momento angular
+em coordenadas cilíndricas.
+Deste modo, sabendo que 
+$\bm{\mathcal{X}}_{lm}(\bm{{\rm\hat{k}}}')=\bm{\mathcal{L}}Y_l^m(\bm{{\rm\hat{k}}}')/\sqrt{l(l+1)}$,
+fazemos
+\begin{eqnarray}
+\alpha^* &=&\bm{\mathcal{L}}Y_l^m(\bm{{\rm\hat{k}}}')\cdot\left[\bm{{\rm\hat{z}}}-\frac{k_z}{\gamma}\bm{\hat{\gamma}}\right]\\
+\beta^* &=&\bm{\mathcal{L}}Y_l^m(\bm{{\rm\hat{k}}}')\cdot\bm{\hat{\zeta}}
+\end{eqnarray}
+o que nos dá diretamente
+\begin{eqnarray}
+\alpha^* &=&\left[\mathcal{L}_z-\frac{k_z}{\gamma}\mathcal{L}_\gamma\right]Y_l^m(\bm{{\rm\hat{k}}}')\\
+\beta^* &=&\frac{k}{\gamma}\mathcal{L}_\zeta Y_l^m(\bm{{\rm\hat{k}}}')
+\end{eqnarray}
+Sabendo que
+\begin{eqnarray}
+\mathcal{L}_\gamma&=&-i\left(-\frac{k_z'}{\gamma'}\right)\frac{\partial}{\partial\zeta'}=-\frac{k_z'}{\gamma'}\mathcal{L}_z\\
+\mathcal{L}_\zeta &=&-i\left(k_z'\frac{\partial}{\partial\gamma'}-\gamma'\frac{\partial}{\partial k_z'}\right)\\
+\mathcal{L}_z     &=&-i\frac{\partial}{\partial\zeta'}
+\end{eqnarray}
+tem-se diretamente que (considerando-se as deltas de Dirac)
+\begin{eqnarray}
+\alpha^* &=&-i\left(1+\frac{k_z^2}{\gamma^2}\right)\frac{\partial}{\partial\zeta'}Y_l^m(\bm{{\rm\hat{k}}}')\\
+\beta^* &=&-i\frac{k}{\gamma}\left(k_z\frac{\partial}{\partial\gamma}-\gamma\frac{\partial}{\partial k_z}\right)Y_l^m(\bm{{\rm\hat{k}}}')
+\end{eqnarray}
+e sabendo que
+\begin{eqnarray}
+Y_l^m(\bm{{\rm\hat{k}}}')=Q_l^m(k_z/k)e^{im\zeta'}
+\end{eqnarray}
+temos que
+\begin{eqnarray}
+\alpha&=&m\frac{k^2}{\gamma^2}Q_l^m(k_z/k)e^{-im\zeta'}\\
+\beta &=&-iQ_l^m{}'(k_z/k)e^{-im\zeta'}
+\end{eqnarray}
+Substituindo estas expressões nas expressões para campos e para os coeficientes, vamos
+ter
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}[TM]\\
+G_{lm}^{TM}[TE]\\
+\end{array}
+\right]
+=\frac{2i^pm}{\sqrt{l(l+1)}}
+\frac{k^2}{\gamma^2}Q_l^m(k_z/k)
+\int d\zeta'~G_\gamma(\zeta')e^{-im\zeta'}
+\end{eqnarray}
+e
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ G_{lm}^{TE}[TE]\\
+-G_{lm}^{TM}[TM]\\
+\end{array}
+\right]
+=\frac{2i^{p-1}}{\sqrt{l(l+1)}}Q_l^m{}'(k_z/k)
+\int d\zeta'~G_\gamma(\zeta')e^{-im\zeta'}
+\end{eqnarray}
+em que
+\begin{eqnarray}
+G_\gamma(\zeta')\frac{\delta(\gamma'-\gamma)}{\gamma}
+=\mathcal{F}\{\bar{g}(\bm{\rho})\}
+=\frac{1}{2\pi}\int d^2\rho~\bar{g}(\bm{\rho})e^{-i\bm{\gamma}'\cdot\bm{\rho}'}
+\end{eqnarray}
+
+%------------------------------------------------------------------------------
+\subsection{Calculo das componentes}
+%------------------------------------------------------------------------------
+Sabemos que 
+\begin{eqnarray}
+\bm{\hat{\gamma}}&=&\frac{e^{-i\zeta}\bm{{\rm\hat{e}}}_++e^{i\zeta}\bm{{\rm\hat{e}}}_-}{\sqrt{2} }\\
+\bm{\hat{\zeta }}&=&\frac{e^{-i\zeta}\bm{{\rm\hat{e}}}_+-e^{i\zeta}\bm{{\rm\hat{e}}}_-}{\sqrt{2}i}
+\end{eqnarray}
+ou
+\begin{eqnarray}
+\bm{\hat{\gamma}}=\frac{e^{-i\zeta}\bm{{\rm\hat{e}}}_++e^{i\zeta}\bm{{\rm\hat{e}}}_-}{\sqrt{2} }
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{c}
+e^{-i\zeta}\\
+0          \\
+e^{ i\zeta}\\
+\end{array}
+\right]
+\end{eqnarray}
+e
+\begin{eqnarray}
+\bm{\hat{\zeta }}=\frac{e^{-i\zeta}\bm{{\rm\hat{e}}}_+-e^{i\zeta}\bm{{\rm\hat{e}}}_-}{\sqrt{2}i}
+=\frac{i}{\sqrt{2}}
+\left[
+\begin{array}{c}
+-e^{-i\zeta}\\
+0          \\
+ e^{ i\zeta}\\
+\end{array}
+\right]
+\end{eqnarray}
+Temos que
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}=\frac{\bm{\mathcal{L}}Y_l^m}{\sqrt{l(l+1)}}
+=\frac{1}{\sqrt{l(l+1)}}\left[
+\begin{array}{c}
+c_-^{lm}Q_l^{m-1}e^{i(m-1)\zeta}/\sqrt{2}\\
+      m Q_l^{m  }e^{i m   \zeta}          \\
+c_+^{lm}Q_l^{m+1}e^{i(m+1)\zeta}/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+Se $\bm{{\rm A}}=A_-\bm{{\rm e}}_++A_+\bm{{\rm e}}_-+A_z\bm{{\rm e}}_z$,
+temos que $\bm{{\rm A}}^*=A_-^*\bm{{\rm e}}_-+A_+^*\bm{{\rm e}}_++A_z^*\bm{{\rm e}}_z$,
+ou seja, há uma inversão da posição dos termos.
+Deste modo
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*
+=\frac{1}{\sqrt{l(l+1)}}\left[
+\begin{array}{c}
+c_+^{lm}Q_l^{m+1}e^{-i(m+1)\zeta}/\sqrt{2}\\
+      m Q_l^{m  }e^{-i m   \zeta}         \\
+c_-^{lm}Q_l^{m-1}e^{-i(m-1)\zeta}/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+Assim sendo, temos que 
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot\bm{\hat{\gamma}}
+&=&\frac{1}{2}\frac{e^{-im\zeta}}{\sqrt{l(l+1)}}
+\Big( c_+^{lm}Q_l^{m+1}+c_-^{lm}Q_l^{m-1}\Big)\\
+\bm{\mathcal{X}}_{lm}^*\cdot\bm{\hat{\zeta}}
+&=&\frac{i}{2}\frac{e^{-im\zeta}}{\sqrt{l(l+1)}}
+\Big( c_+^{lm}Q_l^{m+1}-c_-^{lm}Q_l^{m-1}\Big)\\
+\bm{\mathcal{X}}_{lm}^*\cdot\bm{\hat{z}}
+&=&m\frac{e^{-im\zeta}}{\sqrt{l(l+1)}}Q_l^m
+\end{eqnarray}
+Agora precisamos fazer
+\begin{eqnarray}
+\left[\bm{{\rm\hat{z}}}-\frac{k_z}{\gamma}\bm{\hat{\gamma}}\right]\cdot\bm{\mathcal{X}}_{lm}^*
+&=&\frac{e^{-im\zeta}}{\sqrt{l(l+1)}}
+\Big(mQ_l^m-\frac{1}{2}\frac{k_z}{\gamma}\big(c_+^{lm}Q_l^{m+1}+c_-^{lm}Q_l^{m-1}\big)\Big)
+\end{eqnarray}
+Agora vamos comparar $\alpha$ e $\beta$, dados por
+\begin{eqnarray}
+\alpha&=&m\frac{k^2}{\gamma^2}Q_l^m(k_z/k)\\
+\beta &=&-iQ_l^m{}'(k_z/k)
+\end{eqnarray}
+com seus semelhantes dados por
+\begin{eqnarray}
+\alpha_0&=&mQ_l^m-\frac{1}{2}\frac{k_z}{\gamma}\big(c_-^{lm}Q_l^{m-1}+c_+^{lm}Q_l^{m+1}\big)\\
+\beta_0&=&\frac{-i}{2}\frac{k}{\gamma}\Big(c_-^{lm}Q_l^{m-1}-c_+^{lm}Q_l^{m+1}\Big)
+\end{eqnarray}
+o que nos diz que devemos ter
+\begin{eqnarray}
+m\frac{k^2}{\gamma^2}Q_l^m(k_z/k)
+&=&mQ_l^m-\frac{1}{2}\frac{k_z}{\gamma}\big(c_+^{lm}Q_l^{m+1}+c_-^{lm}Q_l^{m-1}\big)\\
+2\frac{\gamma}{k}Q_l^m{}'&=&c_-^{lm}Q_l^{m-1}-c_+^{lm}Q_l^{m+1}
+\end{eqnarray}
+O primeiro termo nos dá que
+\begin{eqnarray}
+-2m\frac{k_z}{\gamma}Q_l^m(k_z/k)=c_-^{lm}Q_l^{m-1}+c_+^{lm}Q_l^{m+1}
+\end{eqnarray}
+
+
+
+%------------------------------------------------------------------------------
+\subsection{Limites da expansão}
+%------------------------------------------------------------------------------
+Sabemos que as funções de Bessel $J_n(x)$ têm uma aproximação
+para a série crescente dada por
+\begin{eqnarray}
+J_\nu(x)\approx\frac{(x/2)^\nu}{\Gamma(\nu+1)}
+\end{eqnarray}
+para $0\leq x\leq \sqrt{\nu+1}$. Como
+\begin{eqnarray}
+j_n(x)=\sqrt{\frac{\pi}{2x}}J_{n+1/2}(x)
+\end{eqnarray}
+vamos ter que tanto $J_n(x)$ quanto $j_n(x)$ são
+proporcionais a $x^n$. Desta forma, para um dado
+$x_0$, à medida que aumentamos a ordem $n$ da função
+de Bessel, a função $\Gamma(n)$ cresce muito mais
+rápido que $x^m$, o que faz com este termo tenda a zero.
+Com isto podemos impor um limite para a expansão em 
+ondas parciais. Este limite deve ser uma função de 
+$k$ e da maior distância envolvida na expansão, 
+dada por $x_M$, para $x>8$ em torno de $1.5x_M$,
+ou seja, para um $x_M=20$ a expansão pode ser
+truncada em $l_{max}=30$.
+
+%------------------------------------------------------------------------------
+\subsection{Guias de onda}
+%------------------------------------------------------------------------------
+
+Os guias de onda podem, para os casos estudados, retangular ou cilíndrico. 
+Neste caso, vamos ter uma origem arbitrária dentro destes guias de onda 
+dada por $\bm{{\rm r}}_0=(x_0,y_0,z_0)$, o modo propagante TE ou TM, o 
+comprimento de onda incidente $\lambda$ que nos dá um $k=2\pi/\lambda$
+além dos modos propagantes $\gamma_{lm}$ dados em função da geometria do guia,
+seja as dimensões laterais do guia de onda retangular $a$, $b$ ou do raio do
+guia de onda cilíndrico $R$, que nos dão os parâmetros $G_\gamma^q$.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}[TM]\\
+G_{lm}^{TM}[TE]\\
+\end{array}
+\right]
+&=&\frac{2i^pq}{\sqrt{l(l+1)}}\frac{k^2}{\gamma^2}Q_{lm}\left(\frac{k_z}{k}\right)G_\gamma^q,\\
+\left[
+\begin{array}{c}
+-G_{lm}^{TM}[TM]\\
+ G_{lm}^{TE}[TE]\\
+\end{array}
+\right]
+&=&\frac{2i^{p-1}}{\sqrt{l(l+1)}}Q_{lm}'\left(\frac{k_z}{k}\right)G_\gamma^q.
+\end{eqnarray}
+Neste caso, necessitamos calcular os parâmetros $G_\gamma^q$, para cada tipo 
+de guia de onda.
+%------------------------------------------------------------------------------
+\subsection{Derivada de $Q_{lm}(x)$}
+%------------------------------------------------------------------------------
+Conhecendo a relação de recorrência em relação à derivada dos polinomios de 
+Legendre
+\begin{eqnarray}
+(1-x^2)P_l^m{}'=-l x P_l^m+(l+m)P_{l-1}^m,
+\end{eqnarray}
+que vai nos dar
+\begin{eqnarray}
+Q_l^m{}'
+=-\frac{l x }{1-x^2}Q_l^m+\sqrt{\frac{2l+1}{2l-1}}\frac{\sqrt{(l+m)(l-m)}}{1-x^2}Q_{l-1}^m.
+\end{eqnarray}
+Como $P_0^0=1$, implica que este termo tem derivada zero, ou seja, 
+$P_0^0{}'=0$, e a relação de recorrência é válida para $l\geq1$.
+Com isto
+\begin{eqnarray}
+(1-x^2)Q_1^m{}'=-x Q_1^m+\sqrt{3}\sqrt{(1+m)(1-m)}Q_0^m,
+\end{eqnarray}
+o que nos dá que:
+\begin{eqnarray}
+Q_1^{-1}{}'&=&-\frac{x}{1-x^2}Q_1^{-1}\\
+Q_1^{ 0}{}'&=&-\frac{x}{1-x^2}Q_1^{ 0}+\frac{\sqrt{3}}{1-x^2}Q_0^0\\
+Q_1^{ 1}{}'&=&-\frac{x}{1-x^2}Q_1^{ 1}
+\end{eqnarray}
+
+
+%------------------------------------------------------------------------------
+\section{Guia de onda retangular}
+%------------------------------------------------------------------------------
+Os campos no interior dos guias de onda são dados por 
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+  \bm{{\rm E}}^{TM}\\
+ Z\bm{{\rm H}}^{TE}\\
+\end{array}
+\right]
+=\left[\bm{{\rm\hat{z}}}\pm\frac{ik_z}{\gamma^2}\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+e por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+  \bm{{\rm E}}^{TE}\\
+-Z\bm{{\rm H}}^{TM}\\
+\end{array}
+\right]
+=\frac{k}{\gamma^2}\left[-i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\right]\psi
+\end{eqnarray}
+Sabemos que 
+\begin{eqnarray}
+\frac{d}{d\bm{{\rm\rho}}}
+=\bm{{\rm\hat{x}}}\frac{\partial}{\partial x}
++\bm{{\rm\hat{y}}}\frac{\partial}{\partial y}
+\end{eqnarray}
+o que nos dá
+\begin{eqnarray}
+\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}
+=-\bm{{\rm\hat{x}}}\frac{\partial}{\partial y}
+ +\bm{{\rm\hat{y}}}\frac{\partial}{\partial x}
+\end{eqnarray}
+Reescrevendo as equações gerais para os guias de onda temos
+%---------------------------------------
+\begin{eqnarray}
+ \bm{{\rm E}}^{TM}(\bm{{\rm r}})=Z\bm{{\rm H}}^{TE}(\bm{{\rm r}})=
+\left[
+\begin{array}{c}
+i(k_z/\gamma^2)\partial_x\\
+i(k_z/\gamma^2)\partial_y\\
+1\\
+\end{array}
+\right]
+g(\bm{{\rm r}}),
+\end{eqnarray}
+%---------------------------------------
+e para 
+\begin{eqnarray}
+\bm{{\rm E}}^{TE}(\bm{{\rm r}})=-Z\bm{{\rm H}}^{TM}(\bm{{\rm r}})=
+i\frac{k}{\gamma^2}
+\left[
+\begin{array}{c}
+ \partial_y\\
+-\partial_x\\
+0 \\
+\end{array}
+\right]
+g(\bm{{\rm r}})
+\end{eqnarray}
+%---------------------------------------
+Para o guia de onda retangular temos
+\begin{eqnarray}
+g^{TE}(\bm{{\rm r}})&=&\cos(k_xx)\cos(k_yy)e^{ik_zz}\\
+g^{TM}(\bm{{\rm r}})&=&\sin(k_xx)\sin(k_yy)e^{ik_zz}.
+\end{eqnarray}
+Desta forma, os modo transversais magnéticos são dados por
+%---------------------------------------
+% E-TM
+\begin{eqnarray}
+ \bm{{\rm E}}^{TM}(\bm{{\rm r}})=
+\left[
+\begin{array}{c}
+i(k_zk_x/\gamma^2)\cos(k_xx)\sin(k_yy)\\
+i(k_zk_y/\gamma^2)\sin(k_xx)\cos(k_yy)\\
+\sin(k_xx)\sin(k_yy)\\
+%i(k_z/\gamma^2)\partial_x\\
+%i(k_z/\gamma^2)\partial_y\\
+%1\\
+\end{array}
+\right]e^{ik_zz}
+%g^{TM}(\bm{{\rm r}})
+%\sin(k_xx)\sin(k_yy)
+\end{eqnarray}
+%---------------------------------------
+e por
+%---------------------------------------
+% H-TM
+\begin{eqnarray}
+Z\bm{{\rm H}}^{TM}(\bm{{\rm r}})=
+\left[
+\begin{array}{c}
+-i(kk_y/\gamma^2)\sin(k_xx)\cos(k_yy)\\
+ i(kk_x/\gamma^2)\cos(k_xx)\sin(k_yy)\\
+%-\partial_y\\
+% \partial_x\\
+0 \\
+\end{array}
+\right]e^{ik_zz}.
+%g^{TM}(\bm{{\rm r}})
+%\sin(k_xx)\sin(k_yy)
+\end{eqnarray}
+%---------------------------------------
+Por outro lado, os modo transversais elétricos são dados por
+%---------------------------------------
+% H-TE
+\begin{eqnarray}
+Z\bm{{\rm H}}^{TE}(\bm{{\rm r}})=
+\left[
+\begin{array}{c}
+-i(k_zk_x/\gamma^2)\sin(k_xx)\cos(k_yy)\\
+-i(k_zk_y/\gamma^2)\cos(k_xx)\sin(k_yy)\\
+\cos(k_xx)\cos(k_yy)\\
+%i(k_z/\gamma^2)\partial_x\\
+%i(k_z/\gamma^2)\partial_y\\
+%1\\
+\end{array}
+\right]e^{ik_zz}
+%g^{TE}(\bm{{\rm r}})
+%\cos(k_xx)\cos(k_yy)
+\end{eqnarray}
+%---------------------------------------
+e ainda
+%---------------------------------------
+% E-TE
+\begin{eqnarray}
+ \bm{{\rm E}}^{TE}(\bm{{\rm r}})=
+\left[
+\begin{array}{c}
+-i(kk_y/\gamma^2)\cos(k_xx)\sin(k_yy)\\
+ i(kk_x/\gamma^2)\sin(k_xx)\cos(k_yy)\\
+% \partial_y\\
+%-\partial_x\\
+0 \\
+\end{array}
+\right]e^{ik_zz}.
+%g^{TE}(\bm{{\rm r}})
+%\cos(k_xx)\cos(k_yy)
+\end{eqnarray}
+%---------------------------------------
+Assim sendo, temos todas as expressões para os campos eletromagnéticos.
+Para calcular os termos na base em que usamos devemos fazer
+\begin{eqnarray}
+A_\pm=\frac{A_x\pm i A_y}{\sqrt{2}}.
+\end{eqnarray}
+%------------------------------------------------------------------------------
+
+
+%\section{Outros}
+%------------------------------------------------------------------------------
+%\begin{eqnarray}
+%Y_l^m(0,\phi)&=&\sqrt{\frac{2l+1}{4\pi}}\delta_{m,0}\\
+%Y_l^m(\theta,0)&=&\sqrt{\frac{2l+1}{4\pi}}\frac{(l-m)!(l+m)!}{(l-m)!!(l+m)!!}(-1)^{(l+m)/2}\delta_{l+m,2k}
+%\end{eqnarray}
+%------------------------------------------------------------------------------
+\subsection{Geometria do guia de onda retangular}
+%------------------------------------------------------------------------------
+Como sabemos, os modos TE/TM são dados por
+\begin{eqnarray}
+g^{TE}&=&\cos(k_xx')\cos(k_yy')e^{ik_zz'}\\
+g^{TM}&=&\sin(k_xx')\sin(k_yy')e^{ik_zz'}
+\end{eqnarray}
+para $0\leq x'\leq a$ e $0\leq y'\leq b$. Entretanto, estamos interessados
+em um ponto dado por $\bm{{\rm \rho}}_0=(x_0,y_0)$. Em ambos os casos temos
+$-x_0\leq x'-x_0\leq a-x_0$ e $-y_0\leq y'-y_0\leq b-y_0$, o que vai levar 
+a uma geometria $x''=x'-x_0$ para a expansão, e além disso teremos os campos
+reescritos como sendo $x'=x''+x_0$, ou seja
+\begin{eqnarray}
+g^{TE}&=&\cos\{k_x(x''+x_0)\}\cos\{k_y(y''+y_0)\}e^{ik_z(z''+z_0)}\\
+g^{TM}&=&\sin\{k_x(x''+x_0)\}\sin\{k_y(y''+y_0)\}e^{ik_z(z''+z_0)}.
+\end{eqnarray}
+%------------------------------------------------------------------------------
+Para o modo TE temos que fazer a transformada de Fourier de 
+\begin{eqnarray}
+g^{TE}(\bm{{\rm r}}')&=&\cos(k_xx')\cos(k_yy')e^{ik_zz'}e^{ik_zz'}\\
+g^{TM}(\bm{{\rm r}}')&=&\sin(k_xx')\sin(k_yy')e^{ik_zz'}e^{ik_zz'}
+\end{eqnarray}
+ou
+\begin{eqnarray}
+g^{TE}(\bm{{\rm r}}'')&=&\cos\{k_x(x''+x_0)\}\cos\{k_y(y''+y_0)\}e^{ik_z(z''+z_0)}\\
+g^{TM}(\bm{{\rm r}}'')&=&\sin\{k_x(x''+x_0)\}\sin\{k_y(y''+y_0)\}e^{ik_z(z''+z_0)}.
+\end{eqnarray}
+o que vai nos dar
+\begin{eqnarray}
+g^{TE}(\bm{{\rm r}}'')\!\!\!&=&\!\!\!e^{ik_zz_0}\!\left(\frac{e^{ik_xx''}e^{ik_xx_0}+e^{-ik_xx''}e^{-ik_xx_0}}{2 }\right)\!\left(\frac{e^{ik_yy''}e^{k_yy_0}+e^{-ik_yy''}e^{-ik_yy_0}}{2 }\right)\!e^{ik_zz''}\\
+g^{TM}(\bm{{\rm r}}'')\!\!\!&=&\!\!\!e^{ik_zz_0}\!\left(\frac{e^{ik_xx''}e^{ik_xx_0}-e^{-ik_xx''}e^{-ik_xx_0}}{2i}\right)\!\left(\frac{e^{ik_yy''}e^{k_yy_0}-e^{-ik_yy''}e^{-ik_yy_0}}{2i}\right)\!e^{ik_zz''}.
+\end{eqnarray}
+Para obtermos estas expressões no espaço de Fourier temos de fazer
+\begin{eqnarray}
+\mathcal{F}\left\{e^{ik_xx'}\right\}=\frac{1}{\sqrt{2\pi}}\int dx'~e^{-i(k_x'-k_x)x'}=\frac{2\pi}{\sqrt{2\pi}}\delta(k_x'-k_x)
+\end{eqnarray}
+o que vai nos dar
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{(2\pi)^{3/2}}{4 }e^{ik_zz_0}\Big(\delta(k_x'-k_x)e^{ik_xx_0}+\delta(k_x'+k_x)e^{-ik_xx_0}\Big)\times\nonumber\\
+&\times&\Big(\delta(k_y'-k_y)e^{ik_yy_0}+\delta(k_y'+k_y)e^{-ik_yy_0}\Big)\delta(k_z'-k_z)\\
+G^{TM}(\bm{{\rm k}}')&=&-\frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\Big(\delta(k_x'-k_x)e^{ik_xx_0}-\delta(k_x'+k_x)e^{-ik_xx_0}\Big)\times\nonumber\\
+&\times&\Big(\delta(k_y'-k_y)e^{ik_yy_0}-\delta(k_y'+k_y)e^{-ik_yy_0}\Big)\delta(k_z'-k_z).
+\end{eqnarray}
+Multiplicando os termos temos
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\Big(\delta(k_x'-k_x)\delta(k_y'-k_y)e^{ik_xx_0}e^{ ik_yy_0}+\delta(k_x'+k_x)\delta(k_y'-k_y)e^{-ik_xx_0}e^{ ik_yy_0}\Big)
+\right.+\nonumber\\&+&\left.
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{ik_xx_0}e^{-ik_yy_0}+\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-ik_xx_0}e^{-ik_yy_0}\Big)
+\delta(k_z'-k_z)\right]\nonumber\\
+%
+G^{TM}(\bm{{\rm k}}')&=&-\frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{ik_xx_0}e^{ ik_yy_0}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-ik_xx_0}e^{-ik_yy_0}\Big)
+-\nonumber\\&-&
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{ik_xx_0}e^{-ik_yy_0}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-ik_xx_0}e^{-ik_yy_0}\Big)
+\delta(k_z'-k_z)\nonumber
+\end{eqnarray}
+que juntando os termos dá
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\Big(\delta(k_x'-k_x)\delta(k_y'-k_y)e^{i(k_xx_0+k_yy_0)}+\delta(k_x'+k_x)\delta(k_y'-k_y)e^{-i(k_xx_0-k_yy_0)}\Big)
+\right.+\nonumber\\&+&\left.
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i(k_xx_0-k_yy_0)}+\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i(k_xx_0+k_yy_0)}\Big)
+\right]\delta(k_z'-k_z)\nonumber\\
+%
+G^{TM}(\bm{{\rm k}}')&=&-\frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i(k_xx_0+k_yy_0)}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i(k_xx_0-k_yy_0)}\Big)
+\right.+\nonumber\\&-&\left.
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i(k_xx_0-k_yy_0)}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i(k_xx_0+k_yy_0)}\Big)
+\right]\delta(k_z'-k_z)\nonumber
+\end{eqnarray}
+Fazendo $\phi_\pm=k_xx_0\pm k_yy_0$ vamos ter
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\Big(\delta(k_x'-k_x)\delta(k_y'-k_y)e^{i\phi_+}+\delta(k_x'+k_x)\delta(k_y'-k_y)e^{-i\phi_-}\Big)
+\right.+\nonumber\\&+&\left.
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i\phi_-}+\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i\phi_+}\Big)
+\right]\delta(k_z'-k_z)\nonumber\\
+%
+G^{TM}(\bm{{\rm k}}')&=&-\frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i\phi_+}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i\phi_-}\Big)
+\right.+\nonumber\\&-&\left.
+\Big(\delta(k_x'-k_x)\delta(k_y'+k_y)e^{i\phi_-}-\delta(k_x'+k_x)\delta(k_y'+k_y)e^{-i\phi_+}\Big)
+\right]\delta(k_z'-k_z)\nonumber
+\end{eqnarray}
+Mudando para coordenadas cilíndricas, obtemos
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\delta(\zeta'-\zeta)e^{i\phi_+}+\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}
+\right.+\nonumber\\&+&\left.
+\delta(\zeta'+\zeta)e^{i\phi_-}+\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\frac{\delta(\gamma'-\gamma)}{\gamma}\delta(k_z'-k_z)\nonumber\\
+%
+G^{TM}(\bm{{\rm k}}')&=&-\frac{(2\pi)^{3/2}}{4}e^{ik_zz_0}\left[
+\delta(\zeta'-\zeta)e^{i\phi_+}-\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}
+\right.+\nonumber\\&-&\left.
+\delta(\zeta'+\zeta)e^{i\phi_-}+\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\frac{\delta(\gamma'-\gamma)}{\gamma}\delta(k_z'-k_z)\nonumber
+\end{eqnarray}
+%------------------------------------------------------------------------------
+Recolocando os termos vamos ter
+\begin{eqnarray}
+G^{TE}(\bm{{\rm k}}')&=& \frac{\pi}{2}e^{ik_zz_0}\left[
+\delta(\zeta'+\zeta)e^{i\phi_-}+\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}+\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\frac{\delta(\gamma'-\gamma)}{\gamma}
+\big(\sqrt{2\pi}\delta(k_z'-k_z)\big)\nonumber\\
+%
+G^{TM}(\bm{{\rm k}}')&=&\frac{\pi}{2}e^{ik_zz_0}\left[
+ \delta(\zeta'+\zeta)e^{i\phi_-}-\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}-\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\frac{\delta(\gamma'-\gamma)}{\gamma}
+\big(\sqrt{2\pi}\delta(k_z'-k_z)\big)
+\nonumber
+\end{eqnarray}
+Com isto obtemos os valores de 
+\begin{eqnarray}
+G_\gamma^{TE}(\zeta')&=& \frac{\pi}{2}e^{ik_zz_0}\left[
+\delta(\zeta'+\zeta)e^{i\phi_-}+\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}+\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\nonumber\\
+%
+G_\gamma^{TM}(\zeta')&=&\frac{\pi}{2}e^{ik_zz_0}\left[
+ \delta(\zeta'+\zeta)e^{i\phi_-}-\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}-\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]
+\nonumber
+\end{eqnarray}
+Precisamos agora integrar
+\begin{eqnarray}
+I=\int d\zeta'~G_\gamma(\zeta')e^{-im\zeta'}
+\end{eqnarray}
+de modo que obteremos assim
+\begin{eqnarray}
+I^{TE}(\zeta')&=& \frac{\pi}{2}e^{ik_zz_0}\int d\zeta'\left[
+e^{-im\zeta'}\delta(\zeta'+\zeta)e^{i\phi_-}+e^{-im\zeta'}\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+e^{-im\zeta'}\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}+e^{-im\zeta'}\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]\nonumber\\
+%
+I^{TM}(\zeta')&=&\frac{\pi}{2}e^{ik_zz_0}\int d\zeta'\left[
+ e^{-im\zeta'}\delta(\zeta'+\zeta)e^{i\phi_-}-e^{-im\zeta'}\delta(\zeta'-\zeta)e^{i\phi_+}
+\right.+\nonumber\\&+&\left.
+e^{-im\zeta'}\delta(\zeta'+\zeta+\pi)e^{-i\phi_-}-e^{-im\zeta'}\delta(\zeta'-\zeta+\pi)e^{-i\phi_+}
+\right]
+\nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+I^{TE}&=& \frac{\pi}{2}e^{ik_zz_0}\left[
+e^{im\zeta}e^{i\phi_-}+e^{-im\zeta}e^{i\phi_+}
++e^{im\zeta}e^{im\pi}e^{-i\phi_-}+e^{-im\zeta}e^{im\pi}e^{-i\phi_+}
+\right]\nonumber\\
+%
+I^{TM}&=&\frac{\pi}{2}e^{ik_zz_0}\left[
+ e^{im\zeta}e^{i\phi_-}-e^{-im\zeta}e^{i\phi_+}
++e^{im\zeta}e^{im\pi}e^{-i\phi_-}-e^{-im\zeta'}e^{im\pi}e^{-i\phi_+}
+\right]
+\nonumber
+\end{eqnarray}
+que pode ser escrito como
+\begin{eqnarray}
+I^{TE}&=& \frac{\pi}{2}e^{ik_zz_0}\left[
+e^{im\zeta}e^{i\phi_-}+e^{-im\zeta}e^{i\phi_+}
++e^{im\zeta}(-1)^me^{-i\phi_-}+e^{-im\zeta}(-1)^me^{-i\phi_+}
+\right]\nonumber\\
+%
+I^{TM}&=&\frac{\pi}{2}e^{ik_zz_0}\left[
+ e^{im\zeta}e^{i\phi_-}-e^{-im\zeta}e^{i\phi_+}
++e^{im\zeta}(-1)^me^{-i\phi_-}-e^{-im\zeta}(-1)^me^{-i\phi_+}
+\right]
+\nonumber
+\end{eqnarray}
+ou
+\begin{eqnarray}
+I^{TE}&=& \frac{\pi}{2}e^{ik_zz_0}\left[
+e^{ im\zeta}\Big(e^{i\phi_-}+(-1)^me^{-i\phi_-}\Big)+
+e^{-im\zeta}\Big(e^{i\phi_+}+(-1)^me^{-i\phi_+}\Big)
+\right]\\
+%
+I^{TM}&=&\frac{\pi}{2}e^{ik_zz_0}\left[
+ e^{ im\zeta}\Big(e^{i\phi_-}+(-1)^me^{-i\phi_-}\Big)
+-e^{-im\zeta}\Big(e^{i\phi_+}+(-1)^me^{-i\phi_+}\Big)
+\right]
+\end{eqnarray}
+Multiplicando por $1=i^mi^{-m}$ temos
+\begin{eqnarray}
+I^{TE}&=& \frac{\pi i^{-m}}{2}e^{ik_zz_0}\left[
+e^{ im\zeta}\Big(i^me^{i\phi_-}+(-i)^me^{-i\phi_-}\Big)+
+e^{-im\zeta}\Big(i^me^{i\phi_+}+(-i)^me^{-i\phi_+}\Big)
+\right]\\
+%
+I^{TM}&=&\frac{\pi i^{-m}}{2}e^{ik_zz_0}\left[
+ e^{ im\zeta}\Big(i^me^{i\phi_-}+(-i)^me^{-i\phi_-}\Big)
+-e^{-im\zeta}\Big(i^me^{i\phi_+}+(-i)^me^{-i\phi_+}\Big)
+\right]
+\end{eqnarray}
+e agora podemos fazer
+\begin{eqnarray}
+I^{TE}&=& \pi i^{-m}e^{ik_zz_0}\left[
+e^{ im\zeta}\mathfrak{Re}\{i^me^{i\phi_-}\}+e^{-im\zeta}\mathfrak{Re}\{i^me^{i\phi_+}\}
+\right]\\
+%
+I^{TM}&=&\pi i^{-m}e^{ik_zz_0}\left[
+ e^{ im\zeta}\mathfrak{Re}\{i^me^{i\phi_-}\}-e^{-im\zeta}\mathfrak{Re}\{i^me^{i\phi_+}\}
+\right]
+\end{eqnarray}
+
+Vamos agora analizar o caso em que $\bm{{\rm r}}_0=(0,0,0)$. Com isto
+\begin{eqnarray}
+I^{TE}&=& \frac{\pi}{2}\left[
+e^{ im\zeta}\Big(1+(-1)^m\Big)+e^{-im\zeta}\Big(1+(-1)^m\Big)
+\right]\\
+%
+I^{TM}&=&\frac{\pi}{2}\left[
+ e^{ im\zeta}\Big(1+(-1)^m\Big)-e^{-im\zeta}\Big(1+(-1)^m\Big)
+\right]
+\end{eqnarray}
+Para $m$ ímpar, temos que os termos zeram. Para $m$ par, temos
+\begin{eqnarray}
+I^{TE}&=&2\pi\cos m\zeta\\
+%
+I^{TM}&=&2\pi\sin m\zeta
+\end{eqnarray}
+
+
+
+
+%------------------------------------------------------------------------------
+\section{Guia de onda cilíndrico}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\subsection{Campos no interior do guia de onda cilíndrico}
+%------------------------------------------------------------------------------
+As expressões para os campos eletromagnéticos propagantes no guia de onda 
+cilíndrico são dadas em função de 
+\begin{eqnarray}
+\psi_m(\bm{{\rm k}};\bm{{\rm r}})=J_m(\gamma\rho)e^{ism\phi}e^{ik_zz}
+\end{eqnarray}
+em que $s=\pm1$ é a polaridade do campo. Para o caso das expressões
+para uma posição $\bm{{\rm r}}''=\bm{{\rm r}}'+\bm{{\rm r}}_0$,
+podemos escrever $\psi_m(\bm{{\rm r}}'')$ como uma convolução
+\begin{eqnarray}
+\psi_m(\bm{{\rm k}};\bm{{\rm r}}+\bm{{\rm r}}_0)=\sum_{j=-\infty}^\infty
+\psi_{m-j}(\bm{{\rm k}};\bm{{\rm r}}_0)\psi_j(\bm{{\rm k}};\bm{{\rm r}}).
+\end{eqnarray}
+Para o modo TM temos que $\gamma=\chi_{mn}/R$, em que $R$ é o raio do 
+guia de onda e $\chi_{mn}$ é a $n$-ésima raiz da $m$-ésima função de
+Bessel $J_m(x)$. Para o modo $TE$ temos que $\gamma=\chi_{mn}'/R$,
+em que $\chi_{mn}'$ é a $n$-ésima raiz da derivada da $m$-ésima função de
+Bessel $J_m'(x)$. Para ressaltarmos os modos do guia de onda, vamos usar
+então os subíndices $M$ e $N$, para diferenciá-los dos índices de somatórios
+presentes ao longo do texto.
+% % % Em coordenadas cilíndricas temos que 
+% % % \begin{eqnarray}
+% % % \frac{d}{d\bm{{\rm\rho}}}=\bm{\hat{\rho}}\frac{\partial}{\partial\rho}+
+% % % \bm{\hat{\phi}}\frac{1}{\rho}\frac{\partial}{\partial\phi}
+% % % \end{eqnarray}
+% % % de onde obtemos
+% % % \begin{eqnarray}
+% % % \bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}=\bm{\hat{\phi}}\frac{\partial}{\partial\rho}-
+% % % \bm{\hat{\rho}}\frac{1}{\rho}\frac{\partial}{\partial\phi}.
+% % % \end{eqnarray}
+% % % Aplicando estes operadores sobre $\psi_j$ vamos obter
+% % % \begin{eqnarray}
+% % % \frac{d}{d\bm{{\rm\rho}}}\psi_j(\bm{{\rm k}};\bm{{\rm r}})
+% % % &=&\gamma e^{isj\phi}e^{ik_zz}
+% % % \left(
+% % % \bm{\hat{\rho}} J_j'(\gamma\rho)+
+% % % \bm{\hat{\phi}}\frac{isj}{\gamma\rho}J_j(\gamma\rho)
+% % % \right)\\
+% % % -i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\psi_j(\bm{{\rm k}};\bm{{\rm r}})
+% % % &=&-\gamma e^{isj\phi}e^{ik_zz}
+% % % \left(
+% % % %-i\bm{\hat{\phi}} J_j'(\gamma\rho)-\bm{\hat{\rho}}\frac{isj}{\gamma\rho}J_j(\gamma\rho)
+% % % \bm{\hat{\rho}}\frac{sj}{\gamma\rho}J_j(\gamma\rho)
+% % % +\bm{\hat{\phi}} iJ_j'(\gamma\rho)
+% % % \right)
+% % % \end{eqnarray}
+% % % Agora temos de usar as relações de transformação entre 
+% % % $(\bm{\hat{\rho}},\bm{\hat{\phi}})\to(\bm{{\rm\hat{e}}}_-,\bm{{\rm\hat{e}}}_+)$
+% % % dadas por
+% % % \begin{eqnarray}
+% % % \left[
+% % % \begin{array}{c}
+% % % \bm{{\rm\hat{e}}}_+\\
+% % % \bm{{\rm\hat{e}}}_-\\
+% % % \end{array}
+% % % \right]
+% % % =\frac{1}{\sqrt{2}}
+% % % \left[
+% % % \begin{array}{cc}
+% % % e^{ i\phi}& ie^{ i\phi}\\
+% % % e^{-i\phi}&-ie^{-i\phi}\\
+% % % \end{array}
+% % % \right]
+% % % \left[
+% % % \begin{array}{c}
+% % % \bm{\hat{\rho}}\\
+% % % \bm{\hat{\phi}}\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % de tal modo que, multiplicando ambos os lados da equação acima por
+% % % $\bm{{\rm A}}\cdot$, obtemos
+% % % \begin{eqnarray}
+% % % \left[
+% % % \begin{array}{c}
+% % % A_+\\
+% % % A_-\\
+% % % \end{array}
+% % % \right]
+% % % =\frac{1}{\sqrt{2}}
+% % % \left[
+% % % \begin{array}{cc}
+% % % e^{ i\phi}& ie^{ i\phi}\\
+% % % e^{-i\phi}&-ie^{-i\phi}\\
+% % % \end{array}
+% % % \right]
+% % % \left[
+% % % \begin{array}{c}
+% % % A_\rho\\
+% % % A_\phi\\
+% % % \end{array}
+% % % \right].
+% % % \end{eqnarray}
+% % % Assim podemos calcular as componentes dos campos eletromagnéticos como sendo
+% % % \begin{eqnarray}
+% % % \frac{d}{d\bm{{\rm\rho}}}\psi_j(\bm{{\rm k}};\bm{{\rm r}})
+% % % % %&=&\frac{\gamma}{\sqrt{2}} e^{isj\phi}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{cc}
+% % % % %e^{ i\phi}& ie^{i\phi}\\
+% % % % %e^{-i\phi}&-ie^{i\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % % %\left[
+% % % % %\begin{array}{c}
+% % % % %   J_j'(\gamma\rho)\\
+% % % % %isjJ_j (\gamma\rho)/\gamma\rho\\
+% % % % %\end{array}
+% % % % %\right]\\
+% % % % %&=&\frac{\gamma}{\sqrt{2}}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{cc}
+% % % % %\Big(J_j'(\gamma\rho)-sjJ_j(\gamma\rho)/\gamma\rho\Big)e^{i(sj+1)\phi}\\
+% % % % %\Big(J_j'(\gamma\rho)+sjJ_j(\gamma\rho)/\gamma\rho\Big)e^{i(sj-1)\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % % %\\
+% % % % %&=&\frac{s\gamma}{\sqrt{2}}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{cc}
+% % % % %-J_{j+s}(\gamma\rho)e^{is(j+s)\phi}\\
+% % % % % J_{j-s}(\gamma\rho)e^{is(j-s)\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % =\frac{s\gamma}{\sqrt{2}}
+% % % \left[
+% % % \begin{array}{c}
+% % % -\psi_{j+s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % %  \psi_{j-s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % e também
+% % % \begin{eqnarray}
+% % % -i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{{\rm\rho}}}\psi_j(\bm{{\rm k}};\bm{{\rm r}})
+% % % %
+% % % % %&=&-\frac{\gamma}{\sqrt{2}}e^{isj\phi}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{cc}
+% % % % %e^{ i\phi}& ie^{ i\phi}\\
+% % % % %e^{-i\phi}&-ie^{-i\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % % %\left[
+% % % % %\begin{array}{c}
+% % % % %sjJ_j (\gamma\rho)/\gamma\rho\\
+% % % % % iJ_j'(\gamma\rho)\\
+% % % % %\end{array}
+% % % % %\right]\\
+% % % % %%
+% % % % %&=&-\frac{\gamma}{\sqrt{2}}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{c}
+% % % % %%i\Big( iJ_j'(\gamma\rho)-isjJ_j (\gamma\rho)/\gamma\rho\Big)e^{i(sj+1)\phi}\\
+% % % % %%i\Big(-iJ_j'(\gamma\rho)-isjJ_j (\gamma\rho)/\gamma\rho\Big)e^{i(sj-1)\phi}\\
+% % % % %\Big(-J_j'(\gamma\rho)+sjJ_j (\gamma\rho)/\gamma\rho\Big)e^{i(sj+1)\phi}\\
+% % % % %\Big( J_j'(\gamma\rho)+sjJ_j (\gamma\rho)/\gamma\rho\Big)e^{i(sj-1)\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % % %\\
+% % % % %&=&-\frac{s\gamma}{\sqrt{2}}e^{ik_zz}
+% % % % %\left[
+% % % % %\begin{array}{c}
+% % % % %J_{j+s}(\gamma\rho)e^{s(j+s)\phi}\\
+% % % % %J_{j-s}(\gamma\rho)e^{s(j-s)\phi}\\
+% % % % %\end{array}
+% % % % %\right]
+% % % =-\frac{s\gamma}{\sqrt{2}}
+% % % \left[
+% % % \begin{array}{c}
+% % % \psi_{j+s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % % \psi_{j-s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % As expressões para os campos são então dadas por, lembrando
+% % % que o subíndice $M$ representa o modo do guia de onda,
+% % % \begin{eqnarray}
+% % % \left[
+% % % \begin{array}{c}
+% % %  \bm{{\rm E}}^{TM}(\bm{{\rm r}})\\
+% % % Z\bm{{\rm H}}^{TE}(\bm{{\rm r}})\\
+% % % \end{array}
+% % % \right]
+% % % =E_0\left[\bm{{\rm\hat{z}}}+i\frac{k_z}{\gamma^2}\frac{d}{d\bm{\rho}}\right]g(\bm{{\rm r}})
+% % % =E_0
+% % % \left[
+% % % \begin{array}{c}
+% % % -(isk_z/\gamma)\psi_{M+s}(\bm{{\rm k}};\bm{{\rm r}})/\sqrt{2}\\
+% % %                \psi_{M  }(\bm{{\rm k}};\bm{{\rm r}})         \\
+% % %  (isk_z/\gamma)\psi_{M-s}(\bm{{\rm k}};\bm{{\rm r}})/\sqrt{2}\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % e os demais campos por
+% % % \begin{eqnarray}
+% % % \left[
+% % % \begin{array}{c}
+% % % -Z\bm{{\rm H}}^{TM}(\bm{{\rm r}})\\
+% % %   \bm{{\rm E}}^{TE}(\bm{{\rm r}})\\
+% % % \end{array}
+% % % \right]
+% % % =E_0\frac{k}{\gamma^2}\left[-i
+% % % \bm{{\rm\hat{z}}}\times\frac{d}{d\bm{\rho}}\right]g(\bm{{\rm r}})
+% % % =-\frac{sk}{\gamma}\frac{E_0}{\sqrt{2}}
+% % % \left[
+% % % \begin{array}{c}
+% % % \psi_{M+s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % % 0\\
+% % % \psi_{M-s}(\bm{{\rm k}};\bm{{\rm r}})\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % %------------------------------------------------------------------------------
+% % % \subsection{Guias de onda cilíndrico}
+% % % %------------------------------------------------------------------------------
+Vamos escrever o gradiente transversal como sendo
+\begin{eqnarray}
+\frac{d}{d\bm{\rho}}=\bm{{\rm\hat{e}}}_-\partial_++\bm{{\rm\hat{e}}}_+\partial_-
+\end{eqnarray}
+e sambemos que
+\begin{eqnarray}
+\partial_\pm\psi_m=\mp\frac{\gamma s}{\sqrt{2}}\psi_{m\pm s}
+\end{eqnarray}
+e por outro lado
+\begin{eqnarray}
+-i\bm{{\rm\hat{z}}}\times\bm{{\rm\hat{e}}}_\pm=\mp\bm{{\rm\hat{e}}}_\pm
+\end{eqnarray}
+de modo que
+\begin{eqnarray}
+-i\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{\rho}}=\bm{{\rm\hat{e}}}_-\partial_+-\bm{{\rm\hat{e}}}_+\partial_-
+\end{eqnarray}
+o que nos dá diretamente que
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}^{TM}(\bm{{\rm r}})\\
+Z\bm{{\rm H}}^{TE}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\left[\bm{{\rm\hat{z}}}+i\frac{k_z}{\gamma^2}\frac{d}{d\bm{\rho}}\right]g(\bm{{\rm r}})
+=E_0
+\left[
+\begin{array}{c}
+ (isk_z/\gamma)\psi_{M-s}(\bm{{\rm k}};\bm{{\rm r}})/\sqrt{2}\\
+               \psi_{M  }(\bm{{\rm k}};\bm{{\rm r}})         \\
+-(isk_z/\gamma)\psi_{M+s}(\bm{{\rm k}};\bm{{\rm r}})/\sqrt{2}\\
+\end{array}
+\right]
+\end{eqnarray}
+e os demais campos por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+-Z\bm{{\rm H}}^{TM}(\bm{{\rm r}})\\
+  \bm{{\rm E}}^{TE}(\bm{{\rm r}})\\
+\end{array}
+\right]
+=E_0\frac{k}{\gamma^2}\left[-i
+\bm{{\rm\hat{z}}}\times\frac{d}{d\bm{\rho}}\right]\psi_M(\bm{{\rm k}};\bm{{\rm r}})
+=-s\frac{k}{\gamma}\frac{E_0}{\sqrt{2}}
+\left[
+\begin{array}{c}
+\psi_{M-s}(\bm{{\rm k}};\bm{{\rm r}})\\
+0\\
+\psi_{M+s}(\bm{{\rm k}};\bm{{\rm r}})\\
+\end{array}
+\right]
+\end{eqnarray}
+
+% % % %------------------------------------------------------------------------------
+% % % \subsection{Expansão em ondas parciais para o guia de onda cilíndrico - via direta}
+% % % %------------------------------------------------------------------------------
+% % % Sabemos que pela expansão em ondas parciais, vamos ter
+% % % \begin{eqnarray}
+% % % \left[
+% % % \begin{array}{c}
+% % % G_{lm}^{TE}\\
+% % % G_{lm}^{TM}\\
+% % % \end{array}
+% % % \right]
+% % % =\int d\Omega(\bm{{\rm\hat{r}}}')~\bm{{\rm X}}_{lm}^*(\bm{{\rm\hat{r}}}')\cdot
+% % % \left[
+% % % \begin{array}{c}
+% % % \bm{{\rm E}}(\bm{{\rm r}}')\\
+% % % \bm{{\rm H}}(\bm{{\rm r}}')\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % As coordenadas de $\bm{{\rm X}}_{lm}(\bm{{\rm\hat{r}}}')$ são dadas por
+% % % \begin{eqnarray}
+% % % \bm{{\rm X}}_{lm}%=\frac{\bm{\mathcal{L}}Y_l^m}{\sqrt{l(l+1)}}
+% % % =\frac{1}{\sqrt{l(l+1)}}\left[
+% % % \begin{array}{c}
+% % % c_-^{lm}Y_l^{m-1}/\sqrt{2}\\
+% % %       m Y_l^{m  }          \\
+% % % c_+^{lm}Y_l^{m+1}/\sqrt{2}\\
+% % % \end{array}
+% % % \right]
+% % % =\frac{1}{\sqrt{l(l+1)}}\left[
+% % % \begin{array}{c}
+% % % c_-^{lm}Q_l^{m-1}e^{i(m-1)\zeta}/\sqrt{2}\\
+% % %       m Q_l^{m  }e^{i m   \zeta}          \\
+% % % c_+^{lm}Q_l^{m+1}e^{i(m+1)\zeta}/\sqrt{2}\\
+% % % \end{array}
+% % % \right]
+% % % \end{eqnarray}
+% % % Observando as componentes dos campos eletromagnéticos e do harmônico
+% % % esférico vetorial, podemos constatar que vamos ter várias integrais
+% % % do tipo, para $s=-1,0,1$
+% % % \begin{eqnarray}
+% % % I_s=\int d\Omega~Y_l^{m+s}{}^*\psi_{m+s}=\int d\Omega~Q_l^{m+s}e^{-i(m+s)\phi}J_{m+s}(\gamma\rho)e^{is(m+s)\phi}e^{ik_zz}
+% % % \end{eqnarray}
+% % % 
+
+%------------------------------------------------------------------------------
+\subsection{Expansão em ondas parciais}
+%------------------------------------------------------------------------------
+Assumindo 
+$g(\bm{{\rm r}}'')=\psi_M(\bm{{\rm r}}'+\bm{{\rm r}}_0)=\sum_j\psi_{M-j}(\bm{{\rm r}}_0)\psi_j(\bm{{\rm r}}')$, 
+vamos ter de fazer a transformada de Fourier
+de $g(\bm{{\rm r}}'')$ na forma
+\begin{eqnarray}
+G(\bm{{\rm k}}')
+=\frac{1}{(2\pi)^{3/2}}\int d^3r'~\psi_M(\bm{{\rm r}}'+\bm{{\rm r}}_0) e^{-i\bm{{\rm k}}'\cdot\bm{{\rm r}}'}\\
+\end{eqnarray}
+Fazendo a integral em $dz'$, teremos
+\begin{eqnarray}
+G(\bm{{\rm k}}')
+=\frac{\delta(k_z'-k_z)}{\sqrt{2\pi}}\sum_j\psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)
+\int d\rho'\rho'J_j(\gamma'\rho')\int d\phi'e^{-i\bm{\gamma}'\cdot\bm{\rho}'}e^{isj\phi'}
+\end{eqnarray}
+Vamos ter então que fazer
+\begin{eqnarray}
+I=\int d\phi'e^{-i\bm{\gamma}'\cdot\bm{\rho}'}e^{isj\phi'}
+% =\int d\phi'e^{-i\gamma'\rho'\cos(\phi'-\zeta')}e^{isj\phi'}
+\end{eqnarray}
+Sabendo que
+\begin{eqnarray}
+e^{\pm ix\cos(\alpha-\beta)}=\sum_{p=-\infty}^\infty(\pm i)^pJ_p(x)e^{ip(\alpha-\beta)}
+\end{eqnarray}
+e que 
+\begin{eqnarray}
+\bm{\gamma}\cdot\bm{\rho}=k_xx+k_yy=\gamma\rho(\cos\zeta\cos\phi+\sin\zeta\sin\phi)=\gamma\rho\cos(\zeta-\phi)
+\end{eqnarray}
+o que nos dá que
+\begin{eqnarray}
+e^{-i\bm{\gamma}\cdot\bm{\rho}}=e^{-i\gamma\rho\cos(\zeta-\phi)}=\sum_p(-i)^pJ_p(\gamma\rho)e^{ip(\zeta-\phi)}
+\end{eqnarray}
+vamos ter
+\begin{eqnarray}
+I=\sum_p(-i)^pJ_p(\gamma'\rho')e^{ip\zeta'}\int d\phi'~e^{-i(p-sj)\phi'}
+ =2\pi\sum_p(-i)^pJ_p(\gamma'\rho')e^{ip\zeta'}\delta_{p,sj}
+\end{eqnarray}
+\begin{eqnarray}
+I=2\pi(-i)^{sj}J_{sj}(\gamma'\rho')e^{isj\zeta'}
+\end{eqnarray}
+Vamos então verificar quanto vale $(-i)^{sj}J_{sj}$ usando o fato de 
+que $J_{-m}(x)=(-1)^mJ_m(x)$. Para o caso de $s=-1$
+temos $(-i)^{-j}J_{-j}=(i)^j(-1)^jJ_j=(-i)^jJ_j$. Para o caso em que 
+$s=1$, temos $(-i)^jJ_j$. Deste modo, vemos que $(-i)^{sj}J_{sj}=(-i)^jJ_j$
+independente de $s$. Com isto temos 
+\begin{eqnarray}
+I=\int d\phi'e^{-i\bm{\gamma}'\cdot\bm{\rho}'}e^{isj\phi'}
+=2\pi(-i)^jJ_j(\gamma'\rho')e^{isj\zeta'}
+\end{eqnarray}
+
+Substituindo o valor da integral $I$ vamos obter
+\begin{eqnarray}
+G(\bm{{\rm k}}')
+=\sqrt{2\pi}\delta(k_z'-k_z)\sum_j(-i)^j e^{isj\zeta'}\psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)
+\int d\rho'\rho'J_j(\gamma\rho')J_j(\gamma'\rho')
+\end{eqnarray}
+e fazendo a integral em $d\gamma'$ obtemos o resultado final
+\begin{eqnarray}
+G(\bm{{\rm k}}')
+=\sqrt{2\pi}\left[\sum_j(-i)^j e^{isj\zeta'}\psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)\right]
+\frac{\delta(\gamma'-\gamma)}{\gamma}\delta(k_z'-k_z)
+\end{eqnarray}
+de modo que o valor entre colchetes é 
+\begin{eqnarray}
+G_\gamma(\zeta')=\sum_j(-i)^je^{isj\zeta'}\psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)
+\end{eqnarray}
+que vai ser usado na espressão geral
+de cálculo dos coeficientes, por meio da integral em $\zeta'$.
+Assim, sendo $m$ o coeficiente da expansão em ondas parciais, temos
+\begin{eqnarray}
+G_\gamma^m
+=\int d\zeta'~G_\gamma(\zeta')e^{-im\zeta'}
+=\sum_j(-i)^j \psi_{M-j }(\bm{{\rm k}};\bm{{\rm r}}_0)\int d\zeta'~e^{-is(sm-j)\zeta'}
+\end{eqnarray}
+que vai nos dar
+\begin{eqnarray}
+G_\gamma^m
+=2 \pi\sum_j(-i)^j\psi_{M-j }(\bm{{\rm k}};\bm{{\rm r}}_0)\delta_{j,sm}
+=2\pi(-i)^{sm}\psi_{M-sm}(\bm{{\rm k}};\bm{{\rm r}}_0)
+\end{eqnarray}
+Com isto temos a expressão para os coeficientes. Um caso especial é quando 
+$\bm{{\rm r}}_0=0$, o que faz com que $J_{M-sm}(0)=\delta_{m,sM}$, reduzindo
+o somatório da expansão a um somatório somente sobre $l$ e com um único $sM$,
+ou seja
+\begin{eqnarray}
+G_\gamma^m=2\pi(-i)^{M}\delta_{m,sM}
+\end{eqnarray}
+
+% % %------------------------------------------------------------------------------
+% % \section{Lenz}
+% % %------------------------------------------------------------------------------
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[+TM]\\
+% % G_{pq}^{TM}[+TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p-q}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^p\\
+% % iQ_p^q{}'
+% % \end{array}
+% % \right]
+% % J_{q-M}(\gamma\rho_0)e^{-i(q-M)\phi_0}
+% % \end{eqnarray}
+% % 
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[-TM]\\
+% % G_{pq}^{TM}[-TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p-q}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^p\\
+% % iQ_p^q{}'
+% % \end{array}
+% % \right]
+% % (-1)^mJ_{q+M}(\gamma\rho_0)e^{-i(q+M)\phi_0}
+% % \end{eqnarray}
+% % Para $\rho_0=0$ temos
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[+TM]\\
+% % G_{pq}^{TM}[+TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p-M}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^M\\
+% % iQ_p^M{}'
+% % \end{array}
+% % \right]
+% % \delta_{q,M}
+% % \end{eqnarray}
+% % 
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[-TM]\\
+% % G_{pq}^{TM}[-TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p+M}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^{-M}\\
+% % iQ_p^{-M}{}'
+% % \end{array}
+% % \right]
+% % (-1)^M\delta_{q,-M}
+% % \end{eqnarray}
+% % Para o último caso, $(-1)^MQ_p^{-M}=Q_p^M$, que dá
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[-TM]\\
+% % G_{pq}^{TM}[-TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p+M}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^M\\
+% % iQ_p^M{}'
+% % \end{array}
+% % \right]
+% % \delta_{q,-M}
+% % \end{eqnarray}
+% % Podemos então fazer um parâmetro $s$, de modo que
+% % \begin{eqnarray}
+% % \left[
+% % \begin{array}{c}
+% % G_{pq}^{TE}[TM]\\
+% % G_{pq}^{TM}[TM]\\
+% % \end{array}
+% % \right]
+% % =
+% % \frac{4\pi i^{p-sM}}{\sqrt{p(p+1)}}
+% % \left[
+% % \begin{array}{c}
+% % -q(k/k_z)^2Q_p^M\\
+% % iQ_p^M{}'
+% % \end{array}
+% % \right]
+% % \delta_{q,sM}
+% % \end{eqnarray}
+%------------------------------------------------------------------------------
+\section{Feixe de Bessel}
+%------------------------------------------------------------------------------
+Existem dois tipos de feixes de Bessel, dados por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}\\
+Z\bm{{\rm H}}\\
+\end{array}
+\right]
+=E_0
+\left[
+\begin{array}{c}
+\bm{{\rm A}}+\nabla\nabla\cdot\bm{{\rm A}}/k^2\\
+-i\nabla\times\bm{{\rm A}}/k\\
+\end{array}
+\right]
+\end{eqnarray}
+sendo que em um caso $\bm{{\rm A}}_I=\psi_M\bm{{\rm\hat{z}}}$
+em outro caso $\bm{{\rm A}}_{II}=\psi_{M-1}\bm{{\rm\hat{e}}}_\pm$ e
+$\psi_M(\bm{{\rm k}};\bm{{\rm r}})$ é o mesmo definido
+para guia de onda cilíndrico.
+
+Podemos utilizar diretamente a expressão para o rotacional 
+\begin{eqnarray}
+\nabla\times\bm{{\rm A}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{e}}}_z&\bm{{\rm\hat{e}}}_+\\
+\partial_-&\partial_z&\partial_+\\
+A_-&A_z&A_+\\
+\end{array}
+\right|
+=i
+\left[
+\begin{array}{c}
+\partial_-A_z-\partial_zA_-\\
+\partial_+A_--\partial_-A_+\\
+\partial_zA_+-\partial_+A_z\\
+\end{array}
+\right]
+\end{eqnarray}
+Sabendo da simetria cilíndrica do problema vamos utilizar
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+A_+\\
+A_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{cc}
+e^{ i\phi}& ie^{ i\phi}\\
+e^{-i\phi}&-ie^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+A_\rho\\
+A_\phi\\
+\end{array}
+\right]
+\end{eqnarray} 
+temos
+\begin{eqnarray}
+\partial_\pm=\frac{e^{\pm i\phi}}{\sqrt{2}}\Big(\partial_\rho\pm\frac{i}{\rho}\partial_\phi\Big)
+\end{eqnarray}
+Usando o fato de que
+\begin{eqnarray}
+\psi_m=J_m(\gamma\rho)e^{ism\phi}e^{ik_zz}
+\end{eqnarray}
+vamos ter que
+\begin{eqnarray}
+\partial_\pm\psi_m=\frac{e^{\pm i\phi}}{\sqrt{2}}\Big(\partial_\rho\pm\frac{i}{\rho}\partial_\phi\Big)J_m(\gamma\rho)e^{ism\phi}e^{ik_zz}
+\end{eqnarray}
+Aplicando as derivadas e após alguma álgebra
+\begin{eqnarray}
+\partial_\pm\psi_m=\mp\frac{\gamma s}{\sqrt{2}}\Big(\frac{m}{\gamma\rho}J_m(\gamma\rho)\mp sJ_m'(\gamma\rho)\Big)e^{is(m\pm s)\phi}e^{ik_zz}
+\end{eqnarray}
+Das propriedades das funções de Bessel
+\begin{eqnarray}
+\frac{m}{x}J_m(x)\pm J_m'(x)=J_{m\mp1}(x)
+\end{eqnarray}
+temos então que
+\begin{eqnarray}
+\partial_\pm\psi_m=\mp\frac{\gamma s}{\sqrt{2}}\psi_{m\pm s}
+\end{eqnarray}
+Fazendo $p=\pm(1)$, vamos ter
+\begin{eqnarray}
+\partial_p\psi_m=-ps\frac{\gamma}{\sqrt{2}}\psi_{m+ps}
+\end{eqnarray}
+A expressão acima vai ser amplamente utilizada.
+
+Como já dissemos, existem dois tipos de feixes de Bessel, dados por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}\\
+Z\bm{{\rm H}}\\
+\end{array}
+\right]
+=E_0
+\left[
+\begin{array}{c}
+\bm{{\rm A}}+\nabla\nabla\cdot\bm{{\rm A}}/k^2\\
+-i\nabla\times\bm{{\rm A}}/k\\
+\end{array}
+\right]
+\end{eqnarray}
+sendo que em um caso $\bm{{\rm A}}_I=\psi_M\bm{{\rm\hat{z}}}$
+em outro caso $\bm{{\rm A}}_{II}=\psi_{M-1}\bm{{\rm\hat{e}}}_\pm$ e
+$\psi_M(\bm{{\rm k}};\bm{{\rm r}})$ é o mesmo definido
+para guia de onda cilíndrico.
+
+Assim, para o caso $I$ vamos ter 
+$\nabla\cdot\bm{{\rm A}}_I=\nabla\cdot\bm{{\rm\hat{z}}}\psi_m=\partial_z\psi_m=ik_z\psi_m$
+cujo gradiente vai dar
+\begin{eqnarray}
+ik_z\nabla\psi_m
+=ik_z\left[\frac{\gamma s}{\sqrt{2}}
+\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
++ik_z\psi_m\bm{{\rm\hat{z}}}\right]
+\end{eqnarray}      
+o que nos dá
+\begin{eqnarray}
+\frac{1}{k^2}\nabla\nabla\cdot\bm{{\rm A}}
+=
+\frac{is}{\sqrt{2}}\frac{k_z\gamma}{k^2}
+\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
+-\left(\frac{k_z}{k}\right)^2\psi_m\bm{{\rm\hat{z}}}
+\end{eqnarray}      
+e com isso
+\begin{eqnarray}
+\bm{{\rm E}}_I=
+\frac{is}{\sqrt{2}}\frac{k_z\gamma}{k^2}
+\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_+-\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
++\left(\frac{\gamma}{k}\right)^2\psi_m\bm{{\rm\hat{z}}}
+\end{eqnarray}
+e o campo magnético por $-i\nabla\times\bm{{\rm A}}/k$ o que nos dá
+\begin{eqnarray}
+\bm{{\rm H}}_I=
+\frac{is}{\sqrt{2}}\frac{\gamma}{k}
+\Big(\psi_{m-s}\bm{{\rm\hat{e}}}_++\psi_{m+s}\bm{{\rm\hat{e}}}_-\Big)
+\end{eqnarray}
+
+
+Para caso $II$ vamos ter 
+$\nabla\cdot\bm{{\rm A}}_{II}=\nabla\cdot\bm{{\rm\hat{e}}}_p\psi_{m-1}
+=\partial_p\psi_{m-1}=-ps(\gamma/\sqrt{2})\psi_{m+ps-1}$. 
+O gradiente é então dado por 
+$\nabla=\partial_-\bm{{\rm\hat{e}}}_++\partial_+\bm{{\rm\hat{e}}}_-+\partial_z\bm{{\rm\hat{z}}}$
+o que nos diz que vamos ter
+$\partial_{+}\partial_p\psi_{m-1}$,
+$\partial_{-}\partial_p\psi_{m-1}$,
+$\partial_{z}\partial_p\psi_{m-1}$.
+Sendo assim, vamos ter
+\begin{eqnarray}
+\partial_{+}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{+}\psi_{m+ps-1}=  ps\frac{\gamma^2}{2}\psi_{(m-1)+s(p+1)}\\
+\partial_{-}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{-}\psi_{m+ps-1}=- ps\frac{\gamma^2}{2}\psi_{(m-1)+s(p-1)}\\
+\partial_{z}\partial_p\psi_{m-1}&=&-ps\frac{\gamma}{\sqrt{2}}\partial_{z}\psi_{m+ps-1}=-ips\frac{\gamma k_z}{\sqrt{2}}\psi_{(m-1)+ps}
+\end{eqnarray}
+O gradiente vai dar
+\begin{eqnarray}
+-ps\frac{\gamma}{\sqrt{2}}\nabla\psi_{m+ps-1}
+=-ps\frac{\gamma}{\sqrt{2}}\left[\frac{\gamma s}{\sqrt{2}}
+\Big(\psi_{m+ps-s-1}\bm{{\rm\hat{e}}}_+-\psi_{m+ps+s-1}\bm{{\rm\hat{e}}}_-\Big)
++ik_z\psi_{m+ps-1}\bm{{\rm\hat{z}}}\right]
+\end{eqnarray}
+o que nos dá
+\begin{eqnarray}
+\frac{1}{k^2}\nabla\nabla\cdot\bm{{\rm A}}
+=-p\left[\frac{1}{2}\left(\frac{\gamma}{k}\right)^2
+\Big(\psi_{m+ps-s-1}\bm{{\rm\hat{e}}}_+-\psi_{m+ps+s-1}\bm{{\rm\hat{e}}}_-\Big)
++\frac{is}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{m+ps-1}\bm{{\rm\hat{z}}}\right]
+\end{eqnarray}
+Necessitamos agora somar o potencial vetor
+ $\bm{{\rm A}}=\psi_{m-1}\bm{{\rm\hat{e}}}_p$ que só tem uma componente. 
+Vamos então reescrever o potencial como duas componentes dependentes
+de deltas de Kronecker de modo que possa ser incorporado às duas
+componentes do campo elétrico. Vamos escrever então 
+$\bm{{\rm A}}=\psi_{m-1}\big(\delta_{p,-1}\bm{{\rm\hat{e}}}_-+\delta_{p,1}\bm{{\rm\hat{e}}}_+\big)$,
+de modo que o campo elétrico seja escrito como
+\begin{eqnarray}
+\bm{{\rm E}}_{II}
+&=&
+\left(\delta_{p, 1}\psi_{m-1}-p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{(m-1)+s(p-1)}\right)\bm{{\rm\hat{e}}}_+
++
+\left(\delta_{p,-1}\psi_{m-1}+p\frac{1}{2}\frac{\gamma^2}{k^2}\psi_{(m-1)+s(p+1)}\right)\bm{{\rm\hat{e}}}_-
++\nonumber\\
+&-&\frac{ips}{\sqrt{2}}\frac{\gamma k_z}{k^2}\psi_{m+ps-1}\bm{{\rm\hat{z}}}
+\end{eqnarray}
+O campo magnético depende do rotacional. Para o caso em que $\bm{{\rm A}}=\psi\bm{{\rm\hat{e}}}_+$
+o que nos diz que o único termo não zero de $\bm{{\rm A}}$ é $A_-$, o que vai nos dar
+ para o campo magnético
+$\bm{{\rm H}}=(\bm{{\rm\hat{z}}}\partial_+-\bm{{\rm\hat{e}}}_+\partial_z)\psi/k$.
+Para o caso
+$\bm{{\rm A}}=\psi\bm{{\rm\hat{e}}}_-$ teremos o elemento não zero $A_+$ o 
+que vai nos dar
+$\bm{{\rm H}}=(-\bm{{\rm\hat{z}}}\partial_-+\bm{{\rm\hat{e}}}_-\partial_z)\psi/k$.
+Sendo assim, em um caso geral
+$\bm{{\rm A}}=\psi\bm{{\rm\hat{e}}}_p$ vamos ter
+$\bm{{\rm H}}=p(\bm{{\rm\hat{z}}}\partial_p-\bm{{\rm\hat{e}}}_p\partial_z)\psi/k$.
+Substituindo as derivadas de $\psi_{m-1}$ vamos obter
+\begin{eqnarray}
+\bm{{\rm H}}_{II}
+=\frac{p}{k}\Big(\bm{{\rm\hat{z}}}\partial_p-\bm{{\rm\hat{e}}}_p\partial_z\Big)\psi_{m-1}
+=-\Big(\frac{s}{\sqrt{2}}\frac{\gamma}{k}\psi_{m+ps-1}\bm{{\rm\hat{z}}}+ip\frac{k_z}{k}\psi_{m-1}\bm{{\rm\hat{e}}}_p\Big)
+%=ip\Big(k_z\psi_{m-1}\bm{{\rm\hat{e}}}_p+ps\frac{\gamma}{\sqrt{2}}\psi_{m+ps-1}\bm{{\rm\hat{z}}}\Big)
+\end{eqnarray}
+%------------------------------------------------------------------------------
+\subsection{Expansão em ondas parciais}
+%------------------------------------------------------------------------------
+A expansão em ondas parciais se dá em função dos campos eletromagnéticos
+no espaço de Fourier. Os campos por sua vez são escritos em função
+do potencial vetor $\bm{{\rm A}}$, que por sua vez obedece a uma 
+equação de onda $\nabla^2\bm{{\rm A}}=-k^2\bm{{\rm A}}$, o que 
+faz com que, no espaço de Fourier $-k'{}^2\bm{\mathcal{A}}=-k^2\bm{\mathcal{A}}$,
+ou seja, $\bm{\mathcal{A}}=\bm{\mathcal{A}}_{\rm k}\delta(k'-k)/k^2$.
+Deste modo, os campos
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{{\rm E}}\\
+Z\bm{{\rm H}}\\
+\end{array}
+\right]
+=E_0
+\left[
+\begin{array}{c}
+\bm{{\rm A}}+\nabla\nabla\cdot\bm{{\rm A}}/k^2\\
+-i\nabla\times\bm{{\rm A}}/k\\
+\end{array}
+\right]
+\end{eqnarray}
+no espaço de Fourier se tornam
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+ \bm{\mathcal{E}}_{\rm k}\\
+Z\bm{\mathcal{H}}_{\rm k}\\
+\end{array}
+\right]
+=E_0
+\left[
+\begin{array}{c}
+\bm{\mathcal{A}}_{\rm k}-\bm{{\rm\hat{k}}}\bm{{\rm\hat{k}}}\cdot\bm{\mathcal{A}}_{\rm k}\\
+\bm{{\rm\hat{k}}}\times\bm{\mathcal{A}}_{\rm k}\\
+\end{array}
+\right]
+\end{eqnarray}
+
+Para o cálculo dos coeficientes vamos ter então que fazer
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=i^p\sqrt{\frac{2}{\pi}}\int d\Omega~\bm{\mathcal{X}}_{lm}^*\cdot
+\left[
+\begin{array}{c}
+\bm{\mathcal{A}}_{\rm k}\\
+\bm{{\rm\hat{k}}}\times\bm{\mathcal{A}}_{\rm k}\\
+\end{array}
+\right]
+\end{eqnarray}
+Entretanto, sabemos que
+\begin{eqnarray}
+ \bm{\mathcal{X}}_{lm}^*\cdot\big(\bm{{\rm\hat{k}}}\times\bm{\mathcal{A}}_{\rm k}\big)
+=\bm{\mathcal{A}}_{\rm k}\cdot\big(\bm{\mathcal{X}}_{lm}^*\times\bm{{\rm\hat{k}}}\big)
+=-\bm{\mathcal{A}}_{\rm k}\cdot\big(\bm{{\rm\hat{k}}}\times\bm{\mathcal{X}}_{lm}^*\big)
+=i\bm{\mathcal{A}}_{\rm k}\cdot\bm{\mathcal{V}}_{lm}^*
+\end{eqnarray}
+e deste modo
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=i^p\sqrt{\frac{2}{\pi}}\int d\Omega~
+\left[
+\begin{array}{c}
+ \bm{\mathcal{X}}_{lm}^*\\
+i\bm{\mathcal{V}}_{lm}^*\\
+\end{array}
+\right]
+\cdot\bm{\mathcal{A}}_{\rm k}
+\end{eqnarray}
+
+Sabendo que
+\begin{eqnarray}
+\bm{{\rm X}}_{lm}
+&=&\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+c_-^{l,m}Y_{l}^{m-1}/\sqrt{2}\\
+       m Y_{l}^{m  }\\
+c_+^{l,m}Y_{l}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]\\
+\bm{{\rm V}}_{lm}
+&=&
+\frac{1}{\sqrt{l(l+1)}}
+\left[
+\begin{array}{c}
+-(l+1)K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}
+-l K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+ (l+1)K_{0,l}^{m,m  }Y_{l-1}^{m  }
+-l K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\
+ (l+1)K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}
++l K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+\end{array}
+\right]
+%\bm{{\rm Y}}_{lm}
+%&=&
+%\left[
+%\begin{array}{c}
+%-K_{+,l}^{m,m-1}Y_{l-1}^{m-1}/\sqrt{2}+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}/\sqrt{2}\\
+% K_{0,l}^{m,m  }Y_{l-1}^{m  }         +K_{0,l+1}^{m,m  }Y_{l+1}^{m  }         \\
+% K_{-,l}^{m,m+1}Y_{l-1}^{m+1}/\sqrt{2}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}/\sqrt{2}\\
+%\end{array}
+%\right]\\
+%
+\end{eqnarray}
+
+Do guia de onda cilíndrico sabemos que
+\begin{eqnarray}
+\psi_M(\bm{{\rm k}};\bm{{\rm k}}')
+=\sqrt{2\pi}\left[\sum_j(-i)^j e^{isj\zeta'}\psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)\right]
+%\frac{\delta(\gamma'-\gamma)}{\gamma}\delta(k_z'-k_z)
+\frac{\delta(k'-k)}{k^2}\delta(k_z'/k-k_z/k)
+\end{eqnarray}
+e como $d\Omega=\sin\xi d\xi d\zeta=d(k_z/k)d\zeta$, vamos ter
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=2i^l\sum_j(-i)^j \psi_{M'-j}(\bm{{\rm k}};\bm{{\rm r}}_0)\int d\zeta~
+\left[
+\begin{array}{c}
+ \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+\end{array}
+\right]e^{isj\zeta'}
+\end{eqnarray}
+em que $M'$ e $\bm{{\rm\hat{u}}}$ dependem do caso tratado.
+
+Para efeito de comparação, devemos fazer o cálculo com
+$i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{u}}}
+=\bm{\mathcal{X}}_{lm}^*\cdot\big(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}\big)$
+%-------------------------------------------------------------------------------
+\subsection{Caso $I$}
+%-------------------------------------------------------------------------------
+Sendo assim, em que $M'$ e $\bm{{\rm\hat{u}}}$ dependem do caso tratado. Sendo assim,
+vamos ter para o caso $I$ que $M'=M$ e $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{z}}}$
+e que $Y_l^m(\bm{{\rm\hat{k}}})=Q_l^m(k_z/k)e^{im\zeta}$
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+%=\frac{2i^l}{\sqrt{l(l+1)}}\sum_j(-i)^j \psi_{M-j}(\bm{{\rm k}};\bm{{\rm r}}_0)
+=\frac{4\pi i^{l-sm}}{\sqrt{l(l+1)}}\psi_{M-sm}(\bm{{\rm k}};\bm{{\rm r}}_0)
+\left[
+\begin{array}{c}
+% \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{z}}}\\
+m Q_{l}^{m  }\\
+%i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{z}}}\\
+i\Big((l+1)K_{0,l}^{m,m}Q_{l-1}^m-lK_{0,l+1}^{m,m}Q_{l+1}^m\Big)\\
+\end{array}
+\right]
+%\int d\zeta~e^{is(j-sm)\zeta'}
+%\delta_{j,sm}
+\end{eqnarray}
+
+Outro modo de comparar é usar as componentes do operador de momento angular.
+Sabemos que
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}=\frac{\bm{\mathcal{L}}Y_l^m}{\sqrt{l(l+1)}}\\
+\bm{\mathcal{V}}_{lm}=\frac{k\nabla Y_l^m}{\sqrt{l(l+1)}}
+\end{eqnarray}
+Para o caso $I$, 
+sabendo que 
+\begin{eqnarray}
+r\bm{{\rm\hat{z}}}\cdot\nabla Q_l^m(z/r)=r\frac{\partial}{\partial_z}Q_l^m(z/r)
+\end{eqnarray}
+sendo que
+\begin{eqnarray}
+r\frac{\partial}{\partial_z}Q_l^m(z/r)
+=rQ_l^m{}'\frac{\partial}{\partial_z}\left(\frac{z}{r}\right)
+\end{eqnarray}
+Sendo $r^2=\rho^2+z^2$ e fazendo $u=z/\rho$ vamos ter
+\begin{eqnarray}
+\frac{\partial}{\partial_z}\left(\frac{z}{\sqrt{\rho^2+z^2}}\right)
+=\frac{1}{\rho}\frac{\partial}{\partial_u}\left(\frac{u}{\sqrt{1+u^2}}\right)
+\end{eqnarray}
+Resolvendo
+\begin{eqnarray}
+\frac{\partial}{\partial_u}\left(\frac{u}{\sqrt{1+u^2}}\right)
+%=\frac{1}{(1+u^2)^{1/2}}+u\frac{(-1/2)2u}{(1+u^2)^{3/2}}
+=\frac{1}{\sqrt{1+u^2}}\left(1-\frac{u^2}{1+u^2}\right)
+=\frac{1}{\left(\sqrt{1+u^2}\right)^3}
+=\left(\frac{\rho}{r}\right)^3
+\end{eqnarray}
+Com isto temos
+\begin{eqnarray}
+r\bm{{\rm\hat{z}}}\cdot\nabla Q_l^m(z/r)=\left(\frac{\rho}{r}\right)^2Q_l^m{}'(z/r)
+\end{eqnarray}
+o que nos dá imediatamente
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=\frac{4\pi i^{l-sm}}{\sqrt{l(l+1)}}\psi_{M-{sm}}(\bm{{\rm k}};\bm{{\rm r}}_0)%\int d\zeta~
+\left[
+\begin{array}{c}
+% \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+%i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+% \bm{\mathcal{L}}_zY_l^m{}^*\\
+%  i\partial_{k_z/k}Y_l^m{}^*\\
+  mQ_l^m\\
+  i(\gamma/k)^2Q_l^m{}'\\
+\end{array}
+\right]
+%e^{-im\zeta+isj\zeta'}
+%e^{is(j-sm)\zeta'}
+\end{eqnarray}
+Além disso, podemos usar o fato de que 
+\begin{eqnarray}
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{z}}}
+=i\big(
+k_+\bm{{\rm\hat{e}}}_--k_-\bm{{\rm\hat{e}}}_+
+\big)
+=\frac{i}{\sqrt{2}}\frac{\gamma}{k}\big(e^{i\zeta}\bm{{\rm\hat{e}}}_--e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)
+\end{eqnarray}
+Assim, fazendo 
+\begin{eqnarray}
+\bm{\mathcal{X}}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{z}}})
+=\frac{i}{\sqrt{2}}\frac{\gamma}{k}
+\big(\mathcal{X}_-^*\bm{{\rm\hat{e}}}_-+\mathcal{X}_+^*\bm{{\rm\hat{e}}}_+\big)
+\big(e^{i\zeta}\bm{{\rm\hat{e}}}_--e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)
+=\frac{i}{\sqrt{2}}\frac{\gamma}{k}\big(\mathcal{X}_+^*e^{i\zeta}-\mathcal{X}_-^*e^{-i\zeta}\big)
+\end{eqnarray}
+Temos ainda que $\mathcal{X}_\pm=c_\pm^{lm}Q_l^{m\pm1}e^{i(m\pm1)\zeta}$, o que
+faz com que
+\begin{eqnarray}
+\bm{\mathcal{X}}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{z}}})
+=\frac{i}{2}\frac{\gamma}{k}\big(c_+^{lm}Q_l^{m+1}-c_-^{lm}Q_l^{m-1}\big)e^{-im\zeta}
+\end{eqnarray}
+Este resultado nos leva a mais uma expressão para o cálculo do coeficientes de forma.
+Com isto, temos a identidade tripla
+\begin{eqnarray}
+\left(\frac{\gamma}{k}\right)^2Q_l^m{}'
+=(l+1)K_{0,l}^{m,m}Q_{l-1}^m-lK_{0,l+1}^{m,m}Q_{l+1}^m
+=\frac{1}{2}\frac{\gamma}{k}\Big(c_-^{lm}Q_l^{m-1}-c_+^{lm}Q_l^{m+1}\Big)
+\end{eqnarray}
+Neste caso, podemos expressar os coeficientes tanto
+em termos de polinômios de Legendre variando
+$l$, variando $m$ ou pela derivada, de acordo com o que for mais
+conveniente.
+
+
+
+
+
+
+
+
+%-------------------------------------------------------------------------------
+\subsection{Caso $II$}
+%-------------------------------------------------------------------------------
+Para o caso $II$ que $M'=M-1$ e $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_\pm$.
+Para tanto vamos novamente usar $p=\pm(1)$ para determinar a polarização do potencial
+vetor, sendo então que $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_p$ e os
+as componentes dos harmônicos esféricos vetorias conjugados dadas por
+\begin{eqnarray}
+%V_+&=& (l+1)K_{ -,l}^{m,m+1}Y_{l-1}^{m+1}+l K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}\\
+%V_-&=&-(l+1)K_{ +,l}^{m,m-1}Y_{l-1}^{m-1}-l K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}\\
+X_p^*&=&c_{p}^{lm}Q_l^{m+p}e^{-i(m+p)\zeta'}\\
+V_p^*&=&p\Big((l+1)K_{-p,l}^{m,m+p}Q_{l-1}^{m+p}+l K_{p,l+1}^{m,m+p}Q_{l+1}^{m+p}\Big)e^{-i(m+p)\zeta'}
+\end{eqnarray}
+sendo que, dado
+$\bm{{\rm U}}=U_+\bm{{\rm\hat{e}}}_-+U_-\bm{{\rm\hat{e}}}_++U_z\bm{{\rm\hat{e}}}_z$
+temos 
+$\bm{{\rm U}}^*=U_+^*\bm{{\rm\hat{e}}}_++U_-^*\bm{{\rm\hat{e}}}_-+U_z^*\bm{{\rm\hat{e}}}_z$
+o que faz 
+$\bm{{\rm U}}^*\cdot\bm{{\rm\hat{e}}}_p=U_{-p}^*$.
+Vamos ter ainda as constantes definidas como
+\begin{eqnarray}
+c_{\pm}^{lm}&=&\sqrt{l(l+1)-m(m\pm1)}\\
+K_{\pm,l}^{m,q}&=&\sqrt{\frac{(l\pm m)(l\pm q)}{(2l-1)(2l+1)}}
+\end{eqnarray}
+o que faz com que
+\begin{eqnarray}
+c_{p}^{lm}&=&\sqrt{l(l+1)-m(m+p)}\\
+K_{p,l}^{m,q}&=&\sqrt{\frac{(l+pm)(l+pq)}{(2l-1)(2l+1)}}
+\end{eqnarray}
+Substituindo então vamos ter
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+&=&\frac{2i^l}{\sqrt{l(l+1)}}\sum_j(-i)^j \psi_{M-1-j}%(\bm{{\rm k}};\bm{{\rm r}}_0)
+\left[
+\begin{array}{c}
+% \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+%i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+c_{-p}^{lm}Q_l^{m-p}\\
+ip\Big((l+1)K_{-p,l}^{m,m-p}Q_{l-1}^{m-p}+l K_{p,l+1}^{m,m-p}Q_{l+1}^{m-p}\Big)
+\end{array}
+\right]
+\times\nonumber\\
+&\times &\int d\zeta~e^{-i(m-p-sj)\zeta'}
+\end{eqnarray}
+A integral vai nos dar então $2\pi\delta_{j,s(m-p)}$, e então
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=\frac{4\pi i^{l-s(m-p)}}{\sqrt{l(l+1)}} \psi_{M-1-s(m-p)}%(\bm{{\rm k}};\bm{{\rm r}}_0)
+\left[
+\begin{array}{c}
+% \bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+%i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{u}}}\\
+c_{-p}^{lm}Q_l^{m-p}\\
+ip\Big((l+1)K_{-p,l}^{m,m-p}Q_{l-1}^{m-p}+l K_{p,l+1}^{m,m-p}Q_{l+1}^{m-p}\Big)
+\end{array}
+\right]
+\end{eqnarray}
+Para o caso de $\bm{{\rm r}}_0=\bm{{\rm 0}}$, vamos ter
+uma $\delta_{M-1-s(m-p),0}$ que vai depender dos sinais de
+$p$ e $s$. 
+%%-------------------------------------------------------------------------------
+%\begin{table}[h!]
+%\centering
+%\caption{Valores de $\delta_{m,s(M-1)-p}$ de acordo com $m$ e $p$}
+%\label{tab:deltaMSP}
+%\begin{tabular}{rr|l}
+%\hline
+%\hline
+%%$s=  $&$-1$ &$   1$\\
+%$ S$&$ P$&$ m  $\\
+%\hline
+%$-1$&$-1$&$-M+2$\\
+%$-1$&$ 1$&$-M  $\\
+%$ 1$&$-1$&$ M  $\\
+%$ 1$&$ 1$&$ M-2$\\
+%%$p=-1$&$-M+2$&$M-2$\\
+%%$p= 1$&$-M  $&$M  $\\
+%\hline
+%\end{tabular}
+%\end{table}
+%%-------------------------------------------------------------------------------
+Comparativamente, podemos ver os valores
+de $m$ que atendem esta delta na Tabela~\ref{tab:deltaMSP}
+
+A outra forma de se calcular os coeficientes é por meio
+do cálculo de $\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{u}}}$.
+Para o caso de $\bm{{\rm\hat{u}}}=\bm{{\rm\hat{e}}}_p$,
+sabendo que
+\begin{eqnarray}
+\bm{{\rm\hat{k}}}=\frac{1}{\sqrt{2}}\frac{\gamma}{k}
+\big(e^{i\zeta}\bm{{\rm\hat{e}}}_-+e^{-i\zeta}\bm{{\rm\hat{e}}}_+\big)+\frac{k_z}{k}\bm{{\rm\hat{z}}}
+\end{eqnarray}
+vamos obter
+\begin{eqnarray}
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p
+%=ip(k_p\bm{{\rm\hat{z}}}-k_z\bm{{\rm\hat{e}}}_p)
+=ip\left(\frac{1}{\sqrt{2}}\frac{\gamma}{k}e^{ip\zeta}\bm{{\rm\hat{z}}}-\frac{k_z}{k}\bm{{\rm\hat{e}}}_p\right)
+\end{eqnarray}
+Neste caso
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p=\frac{1}{\sqrt{2}}c_{-p}^{lm}Q_l^{m-p}e^{-i(m-p)\zeta}
+\end{eqnarray}
+Deste modo, temos também
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
+=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)e^{-i(m-p)\zeta}
+\end{eqnarray}
+Outro modo é observar que
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
+=ip\left(\frac{m}{\sqrt{2}}\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p\right)e^{-i(m-p)\zeta}
+\end{eqnarray}
+de modo que explicitamente temos
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
+=\frac{ip}{\sqrt{2}}\left(m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}\right)e^{-i(m-p)\zeta}
+\end{eqnarray}
+De outro modo, temos também que 
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
++ip\frac{k_z}{k}\bm{\mathcal{X}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p
+=\frac{ipm}{\sqrt{2}}\frac{\gamma}{k}Q_l^me^{-i(m-p)\zeta}
+\end{eqnarray}
+o que vai nos permitir escrever um coeficiente em função do outro.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}\\
+\end{array}
+\right]
+=2i^l\sum_j(-i)^j \psi_{M-1-j}(\bm{{\rm k}};\bm{{\rm r}}_0)\int d\zeta'~
+\bm{\mathcal{X}}_{lm}^*\cdot
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_p\\
+\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p\\
+\end{array}
+\right]e^{isj\zeta'}
+\end{eqnarray}
+Isto vai nos dar
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+G_{lm}^{TE}\\
+G_{lm}^{TM}+ip(k_z/k)G_{lm}^{TE}\\
+\end{array}
+\right]
+=\frac{4\pi i^{l-s(m-p)}}{\sqrt{2l(l+1)}}\psi_{M-1-s(m-p)}%(\bm{{\rm k}};\bm{{\rm r}}_0)
+%\bm{\mathcal{X}}_{lm}^*\cdot
+\left[
+\begin{array}{c}
+c_{-p}^{lm}Q_l^{m-p}\\
+ipm(\gamma/k)Q_l^m\\
+\end{array}
+\right]
+%\int d\zeta~e^{-i(m-p-sj)\zeta'}
+%\delta_{j,s(m-p)}
+\end{eqnarray}
+Comparando as duas expressões vamos ter a identidade
+\begin{eqnarray}
+\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
+=i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p
+\end{eqnarray}
+o que nos diz que $\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p=V_{-p}^*$,
+ou seja
+\begin{eqnarray}
+%\bm{\mathcal{X}}_{lm}^*\cdot(\bm{{\rm\hat{k}}}\times\bm{{\rm\hat{e}}}_p)
+m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{-p}^{lm}Q_l^{m-p}
+%=i\bm{\mathcal{V}}_{lm}^*\cdot\bm{{\rm\hat{e}}}_p
+=(l+1)K_{p,l}^{m,m-p}Q_{l-1}^{m-p}+l K_{-p,l+1}^{m,m-p}Q_{l+1}^{m-p}
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+% GRADIENTE EM COORDENADAS ESFERICAS
+%-------------------------------------------------------------------------------
+Por último, vamos calcular o gradiente de $Y_l^m$. Para isto, 
+\begin{eqnarray}
+r\nabla
+=r\frac{\partial}{\partial r}\bm{{\rm\hat{r}}}
++\frac{\partial}{\partial\theta}\bm{{\rm\hat{\theta}}}
++\frac{r}{\rho}\frac{\partial}{\partial\phi}\bm{{\rm\hat{\phi}}}
+\end{eqnarray}
+e lembrando que $Y_l^m=Q_l^m(\cos\theta)e^{im\phi}$, temos
+\begin{eqnarray}
+r\nabla
+=\left(-\frac{\rho}{r}Q_l^m{}'\bm{{\rm\hat{\theta}}}+im\frac{r}{\rho}Q_l^m\bm{{\rm\hat{\phi}}}\right)e^{im\phi}
+\end{eqnarray}
+e ainda de que  $r\bm{{\rm\hat{\theta}}}=z\bm{{\rm\hat{\rho}}}-\rho\bm{{\rm\hat{z}}}$
+%\begin{eqnarray}
+%r\bm{{\rm\hat{r}}}&=&\rho\bm{{\rm\hat{\rho}}}+z\bm{{\rm\hat{z}}}\\
+%r\bm{{\rm\hat{\theta}}}&=&z\bm{{\rm\hat{\rho}}}-\rho\bm{{\rm\hat{z}}}
+%\end{eqnarray}
+é possível separar os termos transversais do gradiente, obtendo
+\begin{eqnarray}
+r\nabla
+=\left(-\frac{z\rho}{r^2}Q_l^m{}'\bm{{\rm\hat{\rho}}}+im\frac{r}{\rho}Q_l^m\bm{{\rm\hat{\phi}}}\right)e^{im\phi}
++\frac{\rho^2}{r^2}Q_l^m{}'e^{im\phi}\bm{{\rm\hat{z}}}
+\end{eqnarray}
+Agora usando
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+V_+\\
+V_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2l(l+1)}}
+\left[
+\begin{array}{cc}
+e^{ i\phi}& ie^{ i\phi}\\
+e^{-i\phi}&-ie^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+-z\rho/r^2Q_l^m{}'e^{im\phi}\\
+im(r/\rho)Q_l^me^{im\phi}\\
+\end{array}
+\right]
+\end{eqnarray}
+vamos ter
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+V_+\\
+V_-\\
+\end{array}
+\right]
+=-\frac{1}{\sqrt{2l(l+1)}}
+\left[
+\begin{array}{c}
+\Big(z\rho/r^2Q_l^m{}'+m(r/\rho)Q_l^m\Big)e^{i(m+1)\phi}\\
+\Big(z\rho/r^2Q_l^m{}'-m(r/\rho)Q_l^m\Big)e^{i(m-1)\phi}\\
+\end{array}
+\right]
+\end{eqnarray}
+o que nos permite escrever
+\begin{eqnarray}
+V_p=-\frac{1}{\sqrt{2l(l+1)}}\Big(z\rho/r^2Q_l^m{}'+pm(r/\rho)Q_l^m\Big)e^{i(m+p)\phi}
+\end{eqnarray}
+Novamente, podemos usar $V_{-p}$ e comparar com os resultados anteriores, novamente obtendo
+uma identidade tripla, neste caso 
+\begin{eqnarray}
+V_p&=&-\frac{z\rho}{r^2}Q_l^m{}'-pm\frac{r}{\rho}Q_l^m\\
+   &=&m\frac{\gamma}{k}Q_l^m-\frac{k_z}{k}c_{p}^{lm}Q_l^{m+p}\\
+   &=&(l+1)K_{-p,l}^{m,m+p}Q_{l-1}^{m+p}+l K_{p,l+1}^{m,m+p}Q_{l+1}^{m+p}
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+% CALCULO DA FORCA
+%-------------------------------------------------------------------------------
+\chapter{Cálculo da Força}
+%-------------------------------------------------------------------------------
+A força vai depender de 
+\begin{eqnarray}
+\bm{{\rm F}}(\bm{{\rm r}})=-\frac{\epsilon}{2}\int d\Omega~\bm{{\rm\hat{r}}}\Big(||E||^2+||ZH||^2\Big)
+\end{eqnarray}
+o que por sua vez vai depender de 
+\begin{eqnarray}
+I_{lm}^{jk}&=&\int d\Omega~\bm{{\rm\hat{r}}}~\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm X}}_{jk}\\
+J_{lm}^{jk}&=&\int d\Omega~\bm{{\rm\hat{r}}}~\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm V}}_{jk}
+\end{eqnarray}
+A primeira integral  é facilmente resolvida, sabendo-se que
+\begin{eqnarray}
+\bm{{\rm X}}_{lm}^*\cdot\bm{{\rm X}}_{jk}=\frac{
+c_-^{lm}c_+^{jk}Y_l^{m-1}{}^*Y_j^{k+1}+
+2     m       k Y_l^{m  }{}^*Y_j^{k  }+
+c_+^{lm}c_-^{jk}Y_l^{m+1}{}^*Y_j^{k-1}
+}{2\sqrt{l(l+1)j(j+1)}}
+\end{eqnarray}
+Por outro lado, temos que
+\begin{eqnarray}
+r_-Y_l^m&=&\sin\theta e^{-i\phi}Y_l^m=-K_{+,l}^{m,m-1}Y_{l-1}^{m-1}+K_{-,l+1}^{m,m-1}Y_{l+1}^{m-1}\\
+r_zY_l^m&=&\cos\theta           Y_l^m= K_{0,l}^{m,m  }Y_{l-1}^{m  }+K_{0,l+1}^{m,m  }Y_{l+1}^{m  }\\
+r_+Y_l^m&=&\sin\theta e^{ i\phi}Y_l^m= K_{-,l}^{m,m+1}Y_{l-1}^{m+1}-K_{+,l+1}^{m,m+1}Y_{l+1}^{m+1}
+\end{eqnarray}
+e deste modo temos que 
+%-------------------------------------------------------------------------------
+% MUDANCA DE COORDENADAS
+%-------------------------------------------------------------------------------
+\chapter{Mudança de coordenadas}
+%-------------------------------------------------------------------------------
+Sistemas de coordenadas cartesiano 
+($\bm{{\rm\hat{x}}},\bm{{\rm\hat{y}}},\bm{{\rm\hat{z}}}$),
+circular
+($\bm{{\rm\hat{e}}}_-,\bm{{\rm\hat{z}}},\bm{{\rm\hat{e}}}_+$),
+cilíndrico
+($\bm{{\rm\hat{\rho}}},\bm{{\rm\hat{\phi}}},\bm{{\rm\hat{z}}}$),
+e esférico
+($\bm{{\rm\hat{r}}},\bm{{\rm\hat{\theta}}},\bm{{\rm\hat{\phi}}}$).
+Os sistemas são definidos como 
+$\bm{{\rm r}}=r\bm{{\rm\hat{r}}}$
+ou 
+$r\bm{{\rm\hat{r}}}=x\bm{{\rm\hat{x}}}+y\bm{{\rm\hat{y}}}+z\bm{{\rm\hat{z}}}$
+ou 
+$r\bm{{\rm\hat{r}}}=\rho\bm{{\rm\hat{\rho}}}+z\bm{{\rm\hat{z}}}$,
+já que 
+$\rho\bm{{\rm\hat{\rho}}}=x\bm{{\rm\hat{x}}}+y\bm{{\rm\hat{y}}}$,
+ou ainda
+$r\bm{{\rm\hat{r}}}=\rho(e^{-i\phi}\bm{{\rm\hat{e}}}_++e^{i\phi}\bm{{\rm\hat{e}}}_-)/\sqrt{2}+z\bm{{\rm\hat{z}}}$.
+Temos ainda que $\cos\theta=z/r$, $\sin\theta=\rho/r$, $\cos\phi=x/\rho$ e $\sin\phi=y/\rho$. Das
+relações de amplitude, $r^2=\rho^2+z^2$ e $\rho^2=x^2+y^2$. Finalmente, obtemos
+$\rho\bm{{\rm\hat{\phi}}}=\rho(\bm{{\rm\hat{z}}}\times\bm{{\rm\hat{\rho}}})=-y\bm{{\rm\hat{x}}}+x\bm{{\rm\hat{y}}}$,
+e 
+$r\bm{{\rm\hat{\theta}}}=r(\bm{{\rm\hat{\phi}}}\times\bm{{\rm\hat{r}}})=z\bm{{\rm\hat{\rho}}}-\rho\bm{{\rm\hat{z}}}$.
+Deste modo, podemos passar de um sistema de referências para outro.
+As relações, escritas na forma matricial são dadas abaixo.
+%=======================================
+As coordenadas cilíndricas são dadas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & \sin\phi & 0 \\
+-\sin\phi & \cos\phi & 0 \\
+        0 &        0 & 1 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e a relação inversa entre elas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & -\sin\phi & 0 \\
+ \sin\phi &  \cos\phi & 0 \\
+        0 &        0 & 1 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As coordenadas esféricas são dadas por
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta\cos\phi & \sin\theta\sin\phi &  \cos\theta \\
+ \cos\theta\cos\phi & \cos\theta\sin\phi & -\sin\theta \\
+          -\sin\phi &           \cos\phi &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\bm{{\rm\hat{z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+A relação de cilíndrica para esféricas 
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta & 0 &  \cos\theta \\
+ \cos\theta & 0 & -\sin\theta \\
+          0 & 1 &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{z   }}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e a relação de esféricas para cilíndricas
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\bm{{\rm\hat{z   }}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta & 0 &  \cos\theta \\
+ \cos\theta & 0 & -\sin\theta \\
+          0 & 1 &           0 \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+A relação de circular para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\bm{{\rm\hat{\phi  }}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+  \sin\theta e^{i\phi} & \sqrt{2}\cos\theta &  \sin\theta e^{-i\phi}\\
+  \cos\theta e^{i\phi} &-\sqrt{2}\sin\theta &  \cos\theta e^{-i\phi}\\
+           i e^{i\phi} &                  0 &          -i e^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_-\\
+\bm{{\rm\hat{z}}}\\
+\bm{{\rm\hat{e}}}_+\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As relações abaixo são relações dois
+a dois, sendo que temos
+%=======================================
+de cilíndrica para esférica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta &  \cos\theta \\
+ \cos\theta & -\sin\theta \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+de esférica para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{   z}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \sin\theta &  \cos\theta \\
+ \cos\theta & -\sin\theta \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{   r  }}}\\
+\bm{{\rm\hat{\theta}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+No plano $xy$, de cartesiana para cilíndrica
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi &  \sin\phi \\
+-\sin\phi &  \cos\phi \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de cilíndrica pra cartesiana
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+ \cos\phi & -\sin\phi \\
+ \sin\phi &  \cos\phi \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+As relações entre cartesianas e circulares
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ 1 &  i\\
+ 1 & -i\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de circulares para cartesianas.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{x}}}\\
+\bm{{\rm\hat{y}}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ 1 &  1\\
+-i &  i\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+De cilíndrica para circular
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+ e^{ i\phi} &  ie^{ i\phi}\\
+ e^{-i\phi} & -ie^{-i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+e de circular pra cilíndrica.
+\begin{eqnarray}
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{\rho}}}\\
+\bm{{\rm\hat{\phi}}}\\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}}
+\left[
+\begin{array}{ccc}
+  e^{-i\phi} &  e^{i\phi}\\
+-ie^{-i\phi} & ie^{i\phi}\\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\bm{{\rm\hat{e}}}_+\\
+\bm{{\rm\hat{e}}}_-\\
+\end{array}
+\right]
+\end{eqnarray}
+%=======================================
+%%-------------------------------------------------------------------------------
+%% GRADIENTE EM COORDENADAS CARTESIANAS
+%%-------------------------------------------------------------------------------
+%Por último, vamos calcular o gradiente de $Y_l^m$. Para isto, 
+%vamos lembrar que 
+%\begin{eqnarray}
+%Y_l^m(\bm{{\rm\hat{r}}})=Q_l^m(z/r)e^{im\phi}=Q_l^m(z/r)\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)^m
+%\end{eqnarray}
+%Vale lembrar de que $r=\sqrt{x^2+y^2+z^2}$ e que $\sqrt{l(l+1)}\bm{{\rm V}}_{lm}=r\nabla Y_l^m$.
+%Deste modo, vamos fazer concomitantemente as derivadas em $x$ e em $y$, começando com
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_x\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}r\partial_x\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)\\
+%r\partial_y Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_y\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}r\partial_y\left(\frac{x}{\rho}+i\frac{y}{\rho}\right)
+%\end{eqnarray}
+%em que o segundo termo tem três derivadas. Realizando as derivadas
+%e fazendo $x+iy=\rho e^{i\phi}$ vamos obter
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_x\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}\left( \frac{r}{\rho}+e^{i\phi}\rho r\partial_x\left(\frac{1}{\rho}\right)\right)\\
+%r\partial_y Y_l^m&=&zQ_l^m{}'e^{im\phi}r\partial_y\left(\frac{1}{r}\right)+mQ_l^me^{i(m-1)\phi}\left(i\frac{r}{\rho}+e^{i\phi}\rho r\partial_y\left(\frac{1}{\rho}\right)\right)
+%\end{eqnarray}
+%Temos que $r\partial_{(x,y)} (1/r)=-{(x,y)}/r^2$ e também $\rho\partial_{(x,y)} (1/\rho)=-{(x,y)}/\rho^2$
+%vamos obter
+%\begin{eqnarray}
+%r\partial_x Y_l^m&=&-\frac{xz}{r^2}Q_l^m{}'e^{im\phi}+mQ_l^me^{i(m-1)\phi}\left(\frac{ r}{\rho}-\frac{rxe^{i\phi}}{\rho^2}\right)\\
+%r\partial_y Y_l^m&=&-\frac{yz}{r^2}Q_l^m{}'e^{im\phi}+mQ_l^me^{i(m-1)\phi}\left(\frac{ir}{\rho}-\frac{rye^{i\phi}}{\rho^2}\right)
+%\end{eqnarray} 
+%Juntando os termos
+%\begin{eqnarray}
+%r(\partial_x+i\partial_y)Y_l^m&=&-\frac{z\rho}{r^2}Q_l^m{}'e^{i(m+1)\phi}-\frac{r}{\rho}mQ_l^me^{i(m+1)\phi}\\
+%r(\partial_y-i\partial_y)Y_l^m&=&-\frac{z\rho}{r^2}Q_l^m{}'e^{i(m-1)\phi}+\frac{r}{\rho}mQ_l^me^{i(m-1)\phi}
+%\end{eqnarray} 
+%conforme já havíamos visto.
+
+%-------------------------------------------------------------------------------
+\section{Produtos vetoriais}
+%-------------------------------------------------------------------------------
+Os produtos vetorias são triviais, exceto para o caso de vetores complexos, de 
+modo que
+para 
+$\bm{{\rm A}}=A_-\bm{{\rm\hat{e}}}_++A_z\bm{{\rm\hat{z}}}+A_+\bm{{\rm\hat{e}}}_-$
+$\bm{{\rm B}}=B_-\bm{{\rm\hat{e}}}_++B_z\bm{{\rm\hat{z}}}+B_+\bm{{\rm\hat{e}}}_-$
+vamos ter
+\begin{eqnarray}
+\bm{{\rm A}}\times\bm{{\rm B}}
+=i
+\left|
+\begin{array}{ccc}
+\bm{{\rm\hat{e}}}_-&\bm{{\rm\hat{z}}}&\bm{{\rm\hat{e}}}_+\\
+A_-                &A_z              &A_+                \\
+B_-                &B_z              &B_+                \\
+\end{array}
+\right|
+\end{eqnarray}
+sendo que $A_\pm=\bm{{\rm\hat{e}}}_\pm\cdot\bm{{\rm A}}$. Os vetores são
+representados como sendo
+\begin{eqnarray}
+\bm{{\rm A}}
+=
+\left[
+\begin{array}{c}
+A_-\\
+A_z\\
+A_+\\
+\end{array}
+\right]
+\end{eqnarray}
+%-------------------------------------------------------------------------------
+% SEGUNDA PARTE - RESULTADOS
+%-------------------------------------------------------------------------------
+% % \part{Resultados}
+% % %------------------------------------------------------------------------------
+% % \chapter{Guia de onda Retangular}
+% % %------------------------------------------------------------------------------
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemRwgWfd}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepRwgWfd}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezRwgWfd}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmRwgWfd}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpRwgWfd}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzRwgWfd}}
+% % %                  
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemRwgWfd}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepRwgWfd}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezRwgWfd}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmRwgWfd}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpRwgWfd}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzRwgWfd}}
+% % \caption{Real and imaginary parts of the wave field definition (WFD) components of rectangular wave guide (RWG).}
+% % \end{figure}
+% % 
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemRwgPwe}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepRwgPwe}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezRwgPwe}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmRwgPwe}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpRwgPwe}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzRwgPwe}}
+% % %                  
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemRwgPwe}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepRwgPwe}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezRwgPwe}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmRwgPwe}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpRwgPwe}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzRwgPwe}}
+% % \caption{Real and imaginary parts of the partial wave expansion (PWE) of the rectangular wave guide (RWG).}
+% % \end{figure}
+% % %------------------------------------------------------------------------------
+% % \chapter{Guia de onda Cilíndrico}
+% % %------------------------------------------------------------------------------
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemCwgWfd}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepCwgWfd}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezCwgWfd}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmCwgWfd}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpCwgWfd}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzCwgWfd}}
+% % %                  
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemCwgWfd}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepCwgWfd}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezCwgWfd}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmCwgWfd}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpCwgWfd}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzCwgWfd}}
+% % \caption{Real and imaginary parts of the wave field definition (WFD) components of cylindrical wave guide (CWG).}
+% % \end{figure}
+% % 
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemCwgPwe}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepCwgPwe}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezCwgPwe}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmCwgPwe}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpCwgPwe}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzCwgPwe}}
+% % %                  
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemCwgPwe}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepCwgPwe}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezCwgPwe}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmCwgPwe}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpCwgPwe}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzCwgPwe}}
+% % \caption{Real and imaginary parts of the partial wave expansion (PWE) of the cylindrical wave guide (CWG).}
+% % \end{figure}
+% % 
+% % %------------------------------------------------------------------------------
+% % \chapter{Bessel Beam TE/TM}
+% % %------------------------------------------------------------------------------
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemBbzWfd}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepBbzWfd}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezBbzWfd}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmBbzWfd}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpBbzWfd}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzBbzWfd}}
+% % %
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemBbzWfd}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepBbzWfd}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezBbzWfd}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmBbzWfd}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpBbzWfd}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzBbzWfd}}
+% % \caption{Real and imaginary parts of the wave field definition (WFD) components of a Bessel beam
+% %  in a TE/TM configuration (BBZ)}
+% % \end{figure}
+% % 
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemBbzPwe}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepBbzPwe}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezBbzPwe}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmBbzPwe}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpBbzPwe}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzBbzPwe}}
+% % %
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemBbzPwe}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepBbzPwe}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezBbzPwe}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmBbzPwe}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpBbzPwe}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzBbzPwe}}
+% % \caption{Real and imaginary parts of the partial wave expansion (PWE) of a Bessel beam
+% %  in a TE/TM configuration (BBZ)}
+% % \end{figure}
+% % 
+% % %------------------------------------------------------------------------------
+% % \chapter{Bessel Beam Circularmente polarizado}
+% % %------------------------------------------------------------------------------
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemBbpWfd}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepBbpWfd}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezBbpWfd}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmBbpWfd}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpBbpWfd}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzBbpWfd}}
+% % %
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemBbpWfd}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepBbpWfd}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezBbpWfd}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmBbpWfd}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpBbpWfd}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzBbpWfd}}
+% % \caption{Real and imaginary parts of the wave field definition (WFD) components of a Bessel beam
+% %  in a circularly polarized form (BBP)}
+% % \end{figure}
+% % 
+% % \begin{figure}
+% % \centering
+% % \subfigure[Re $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTemBbpPwe}}
+% % \subfigure[Re $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTepBbpPwe}}
+% % \subfigure[Re $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReTezBbpPwe}}
+% % \subfigure[Re $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThmBbpPwe}}
+% % \subfigure[Re $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThpBbpPwe}}
+% % \subfigure[Re $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ReThzBbpPwe}}
+% % %
+% % \subfigure[Im $E_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTemBbpPwe}}
+% % \subfigure[Im $E_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTepBbpPwe}}
+% % \subfigure[Im $E_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImTezBbpPwe}}
+% % \subfigure[Im $H_-$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThmBbpPwe}}
+% % \subfigure[Im $H_+$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThpBbpPwe}}
+% % \subfigure[Im $H_z$]{\includegraphics[width=.15\textwidth,type=pdf,ext=.pdf,read=.pdf]{ImThzBbpPwe}}
+% % \caption{Real and imaginary parts of the partial wave expansion (PWE) of a Bessel beam
+% %  in a circularly polarized form (BBP)}
+% % \end{figure}
+% % 
+% % %------------------------------------------------------------------------------
+\end{document}
+%------------------------------------------------------------------------------
