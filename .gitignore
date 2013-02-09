@@ -1,0 +1,12 @@
+# text editors (emacs, vim)
+*~
+*.swp
+# C
+*.o
+*.so
+# TeX
+*.aux
+*.log
+*.out
+*.toc
+*.pdf

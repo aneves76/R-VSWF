@@ -1,0 +1,31 @@
+#-------------------------------------------------------------------------------
+rm(list=ls())
+source("BSC.R")
+#-------------------------------------------------------------------------------
+lmax<-4
+p<--1
+LMAX=lmax*(lmax+2)+1
+th<-seq(0,pi,by=pi/199)
+cth<-cos(sample(th,1))
+sth<-sqrt(1-cth^2)
+#-------------------------------------------------------------------------------
+clmp<-function(l,m,p){return(sqrt(l*(l+1)-m*(m+p)))}
+Klmqp<-function(l,m,q,p){return(sqrt(((l+p*m)*(l+p*q))/((2*l-1)*(2*l+1))))}
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+   u<-LegendrePolynomialsQlm(cth,lmax+1)
+   Qlm<-u$Qlm
+   dQlm<-u$dQlm
+   rm(u)
+#-------------------------------------------------------------------------------
+u<-rep(1,LMAX)
+v<-rep(1,LMAX)
+w<-rep(1,LMAX)
+for(l in 1:lmax){
+   m<--l:l
+   u[jlm(l,m)]<-p*((l+1)*Klmqp(l,m,m+p,-p)*Qlm[jlm(l-1,m+p)]+l*Klmqp(l+1,m,m+p,p)*Qlm[jlm(l+1,m+p)])
+   v[jlm(l,m)]<-p*(cth*clmp(l,m,p)*Qlm[jlm(l,m+p)]-m*sth*Qlm[jlm(l,m)])
+   w[jlm(l,m)]<--(cth*sth*dQlm[jlm(l,m)]+p*m*Qlm[jlm(l,m)]/sth)
+}
+uv<-data.frame(u,v,w)
+print(uv)
